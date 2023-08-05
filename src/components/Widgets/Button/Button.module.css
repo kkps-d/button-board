@@ -1,0 +1,17 @@
+.button {
+  /* background-color: red; */
+}
+
+.button > div {
+  width: 90%;
+  height: 90%;
+  outline: 1px solid var(--component-outline-color);
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  font-weight: bold;
+}
