@@ -6,3 +6,21 @@ body,
   margin: 0;
   padding: 0;
 }
+
+.react-resizable-handle::after {
+  width: 0 !important;
+  height: 0 !important;
+  border: none !important;
+
+  border-top: 4px solid transparent !important;
+  border-left: 4px solid transparent !important;
+  border-right: 4px solid var(--color-widget-border) !important;
+  border-bottom: 4px solid var(--color-widget-border) !important;
+
+  right: 7px !important;
+  bottom: 7px !important;
+}
+
+.react-resizable-handle {
+  background-image: none !important;
+}

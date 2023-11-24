@@ -1,11 +1,14 @@
 :root {
   --color-background: #323232;
 
-  --color-border: #999999;
+  --color-border: #999;
 
+  --color-widget-background: #323232;
+  --color-widget-background-pressed: #d9d9d9;
   --color-widget-border: #767676;
+  --color-widget-border-pressed: #fff;
 
-  --color-font: #999999;
+  --color-font: #999;
 
-  --color-board-grid: #999999;
+  --color-board-grid: #999;
 }

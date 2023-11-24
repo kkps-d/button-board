@@ -1,6 +1,10 @@
 import ReactGridLayout from "react-grid-layout";
 import styles from "./BoardContainer.module.css";
 import { useEffect, useRef } from "react";
+import createWidget from "../CreateWidget";
+
+import "/node_modules/react-grid-layout/css/styles.css";
+import "/node_modules/react-resizable/css/styles.css";
 
 const GRID_SIZES = {
   small: 80,
@@ -50,7 +54,11 @@ function BoardContainer() {
 
   for (let c = 0; c < COLS; c++) {
     for (let r = 0; r < ROWS; r++) {
-      layout.push({ i: `${r}${c}`, x: c, y: r, w: 1, h: 1 });
+      layout.push({
+        id: `${r}${c}`,
+        type: "base",
+        layout: { x: c, y: r, w: 1, h: 1 },
+      });
     }
   }
 
@@ -73,6 +81,7 @@ function BoardContainer() {
       <ReactGridLayout
         className={styles.board}
         style={{
+          backgroundImage: `${EDIT ? "" : "none"}`,
           backgroundSize: `${bgSize}px ${bgSize}px`,
           backgroundPosition: `top ${bgPosition}px left ${bgPosition}px`,
           width: boardWidth,
@@ -84,16 +93,10 @@ function BoardContainer() {
         width={boardWidth}
         compactType={null}
         autoSize={false}
-        layout={layout}
         isDraggable={EDIT}
         isResizable={EDIT}
       >
-        {layout.map((l) => (
-          <div
-            style={{ boxSizing: "border-box", border: "1px solid gray" }}
-            key={l.i}
-          ></div>
-        ))}
+        {layout.map((l) => createWidget(l))}
       </ReactGridLayout>
     </div>
   );

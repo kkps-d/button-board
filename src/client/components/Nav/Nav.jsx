@@ -17,7 +17,9 @@ function Nav() {
 }
 
 function FullscreenButton() {
-  const [isFullscreen, setFullscreen] = useState(false);
+  const [isFullscreen, setFullscreen] = useState(
+    document.fullscreenElement != null
+  );
 
   useEffect(() => {
     function handleFullScreenChange() {
