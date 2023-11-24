@@ -1,0 +1,17 @@
+.container {
+  align-items: center;
+  justify-content: center;
+  /* background-color: green; */
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 0;
+  overflow: hidden;
+  touch-action: none;
+}
+
+.board {
+  background-image: radial-gradient(
+    transparent 95%,
+    var(--color-board-grid) 96%
+  );
+}
