@@ -1,27 +1,38 @@
 import { useEffect, useRef } from "react";
 import styles from "./WidgetBase.module.css";
 
-function WidgetBase({ className = "", children }) {
+function WidgetBase({
+  className = "",
+  onPointerUp = () => {},
+  onPointerDown = () => {},
+  onClick = () => {},
+  children,
+}) {
   const ref = useRef(null);
 
   useEffect(() => {
     const elm = ref.current;
 
     const pointerDown = () => {
-      elm.classList.add("pressed");
+      onPointerDown(elm);
     };
 
     const pointerUp = () => {
-      elm.classList.remove("pressed");
+      onPointerUp(elm);
+    };
+
+    const click = () => {
+      onClick(elm);
     };
 
     elm.addEventListener("pointerdown", pointerDown);
-
     elm.addEventListener("pointerup", pointerUp);
+    elm.addEventListener("click", click);
 
     return () => {
       elm.removeEventListener("pointerdown", pointerDown);
       elm.removeEventListener("pointerup", pointerUp);
+      elm.removeEventListener("click", click);
     };
   }, []);
 

@@ -1,7 +1,7 @@
 import ReactGridLayout from "react-grid-layout";
 import styles from "./BoardContainer.module.css";
 import { useEffect, useRef } from "react";
-import createWidget from "../CreateWidget";
+import createWidget from "../Widgets/createWidget";
 
 import "/node_modules/react-grid-layout/css/styles.css";
 import "/node_modules/react-resizable/css/styles.css";
@@ -50,17 +50,30 @@ function BoardContainer() {
   const bgSize = GRID_SIZE + GRID_GUTTER;
   const bgPosition = GRID_GUTTER / 2;
 
-  let layout = [];
+  // let layout = [];
 
-  for (let c = 0; c < COLS; c++) {
-    for (let r = 0; r < ROWS; r++) {
-      layout.push({
-        id: `${r}${c}`,
-        type: "base",
-        layout: { x: c, y: r, w: 1, h: 1 },
-      });
-    }
-  }
+  // for (let c = 0; c < COLS; c++) {
+  //   for (let r = 0; r < ROWS; r++) {
+  //     layout.push({
+  //       id: `${r}${c}`,
+  //       type: "base",
+  //       layout: { x: c, y: r, w: 1, h: 1 },
+  //     });
+  //   }
+  // }
+
+  let layout = [
+    {
+      id: "a",
+      type: "base",
+      layout: { x: 0, y: 0, w: 1, h: 1 },
+    },
+    {
+      id: "b",
+      type: "button",
+      layout: { x: 1, y: 0, w: 1, h: 1 },
+    },
+  ];
 
   useEffect(() => {
     /** Calculate the space available for the board */
