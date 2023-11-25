@@ -1,5 +1,5 @@
 import ReactGridLayout from "react-grid-layout";
-import styles from "./BoardContainer.module.css";
+import styles from "./Board.module.css";
 import { useEffect, useRef } from "react";
 import createWidget from "../Widgets/createWidget";
 
@@ -39,7 +39,7 @@ function calculateGridCount(totalSize, gridSize, gridItemMargin) {
   return Math.floor(gridCount);
 }
 
-function BoardContainer() {
+function Board() {
   const containerRef = useRef(null);
 
   /** Calculate the board width and height based on the rows and cols */
@@ -115,4 +115,4 @@ function BoardContainer() {
   );
 }
 
-export default BoardContainer;
+export default Board;

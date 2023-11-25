@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import styles from "./App.module.css";
 import Nav from "./components/Nav/Nav";
-import BoardContainer from "../common/components/Board/BoardContainer";
+import Board from "../common/components/Board/Board";
 
 function App() {
   useEffect(() => {
@@ -11,7 +11,7 @@ function App() {
   return (
     <div className={styles.container}>
       <Nav />
-      <BoardContainer />
+      <Board />
     </div>
   );
 }
