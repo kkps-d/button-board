@@ -7,10 +7,7 @@
 
   border: 1px solid;
 
-  transition-property: border-color;
-  transition-property: box-shadow;
-  transition-property: background-color;
-  transition-property: color;
+  transition-property: border-color box-shadow background-color color;
   border-color: var(--color-widget-border);
   box-shadow: none;
   background-color: var(--color-widget-background);

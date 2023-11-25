@@ -1,5 +1,5 @@
 import Button from "./Button/Button";
-import WidgetBase from "./WidgetBase/WidgetBase";
+import Label from "./Label/Label";
 
 /** Returns the wrapping div required for react-grid-layout and the selected widget component */
 export default function createWidget(description) {
@@ -13,7 +13,7 @@ export default function createWidget(description) {
       break;
 
     default:
-      widget = <WidgetBase></WidgetBase>;
+      widget = <Label description={description} />;
       break;
   }
 
