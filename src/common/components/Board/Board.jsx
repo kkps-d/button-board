@@ -66,12 +66,24 @@ function Board() {
     {
       id: "a",
       type: "base",
-      layout: { x: 0, y: 0, w: 1, h: 1 },
+      layout: { x: 0, y: 1, w: 1, h: 1 },
+      state: {},
     },
     {
       id: "b",
       type: "button",
-      layout: { x: 1, y: 0, w: 1, h: 1 },
+      layout: { x: 1, y: 1, w: 2, h: 1 },
+    },
+    {
+      id: "c",
+      type: "label",
+      layout: { x: 0, y: 0, w: 2, h: 1 },
+      state: {
+        label: "My label",
+        fontSize: "fit",
+        align: "center",
+        showBorders: false,
+      },
     },
   ];
 

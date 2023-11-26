@@ -12,8 +12,21 @@ export default function createWidget(description) {
       widget = <Button description={description} />;
       break;
 
-    default:
+    case "label":
       widget = <Label description={description} />;
+      break;
+
+    default:
+      widget = (
+        <Label
+          description={{
+            ...description,
+            state: {
+              label: `Unknown type\n'${type}'`,
+            },
+          }}
+        />
+      );
       break;
   }
 
