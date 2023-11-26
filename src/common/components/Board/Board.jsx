@@ -72,7 +72,11 @@ function Board() {
     {
       id: "b",
       type: "button",
-      layout: { x: 1, y: 1, w: 2, h: 1 },
+      layout: { x: 1, y: 1, w: 1, h: 1 },
+      state: {
+        label: "Mute",
+        fontSize: "fit",
+      },
     },
     {
       id: "c",
