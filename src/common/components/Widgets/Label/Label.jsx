@@ -1,6 +1,6 @@
 import styles from "./Label.module.css";
 import * as Descriptions from "../Descriptions.js";
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import fitToContainer from "../../../fitToContainer.js";
 
 /**
