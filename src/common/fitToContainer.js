@@ -1,14 +1,13 @@
 const canvas = document.createElement("canvas");
 const ctx = canvas.getContext("2d");
 
-export default function fitToContainer(text, containerElm, maxSize = 100) {
-  containerElm.innerHTML = "";
+export default function fitToContainer(containerElm, maxSize = 100) {
+  let text = containerElm.innerText;
   if (text.length < 1) return;
 
   // Get the required styles of the container
   const {
     fontFamily,
-    display,
     borderLeftWidth: lw,
     borderRightWidth: rw,
     borderBottomWidth: bw,
@@ -26,13 +25,11 @@ export default function fitToContainer(text, containerElm, maxSize = 100) {
   const lines = text.split("\n");
   const lineCount = lines.length;
 
-  // Find the max width between the lines, also add the lines to the container
+  // Find the max width between the lines
   let textWidth = Number.MIN_VALUE;
   let metrics;
   for (const line of lines) {
     metrics = ctx.measureText(line);
-    containerElm.innerHTML += `<span>${line}</span>`;
-    if (display != "flex") containerElm.innerHTML += "<br />";
     textWidth = Math.max(metrics.width, textWidth);
   }
 
