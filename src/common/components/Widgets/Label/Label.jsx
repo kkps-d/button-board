@@ -1,7 +1,7 @@
 import styles from "./Label.module.css";
 import * as Descriptions from "../Descriptions.js";
 import { useEffect, useRef } from "react";
-import fitToContainer from "../../../fitToContainer.js";
+import fitToContainer from "../../../utilities/fitToContainer.js";
 import useResizeObserver from "@react-hook/resize-observer";
 
 /**
