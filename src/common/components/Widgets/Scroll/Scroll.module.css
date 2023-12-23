@@ -1,0 +1,8 @@
+.scroll {
+  border: 1px solid;
+
+  border-color: var(--color-widget-border);
+  box-shadow: none;
+  background-color: var(--color-widget-background);
+  color: var(--color-font);
+}

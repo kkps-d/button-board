@@ -1,5 +1,6 @@
 import Button from "./Button/Button";
 import Label from "./Label/Label";
+import Scroll from "./Scroll/Scroll";
 
 /** Returns the wrapping div required for react-grid-layout and the selected widget component */
 export default function createWidget(description) {
@@ -14,6 +15,10 @@ export default function createWidget(description) {
 
     case "label":
       widget = <Label description={description} />;
+      break;
+
+    case "v-scroll":
+      widget = <Scroll description={description} />;
       break;
 
     default:
