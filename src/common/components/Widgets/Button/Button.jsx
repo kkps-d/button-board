@@ -1,17 +1,21 @@
+import { useBoard } from "../../../contexts/BoardContext/BoardContext";
 import fitToContainer from "../../../fitToContainer";
 import styles from "./Button.module.css";
 import { useEffect, useRef } from "react";
 
 function Button({ description }) {
   const ref = useRef(null);
+  const { editMode } = useBoard();
 
   const { label = "My button", fontSize = "fit" } = description.state;
 
   const pointerDown = () => {
+    if (editMode) return;
     ref.current.classList.add(styles.pressed);
   };
 
   const pointerUp = () => {
+    if (editMode) return;
     ref.current.classList.remove(styles.pressed);
   };
 
