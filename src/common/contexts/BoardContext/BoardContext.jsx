@@ -51,6 +51,12 @@ function reducer(state, action) {
         ...state,
         descriptions: state.descriptions,
       };
+    case "updateLayout":
+      for (let layout of action.layouts) {
+        const { i, ...theRest } = layout;
+        state.descriptions[Number(i)].layout = theRest;
+      }
+      return state;
     default:
       throw new Error("Unknown action for BoardContext dispatcher");
   }
@@ -71,8 +77,11 @@ function BoardProvider({ children }) {
   }
 
   function deleteWidget(id) {
-    console.log(id);
     dispatch({ type: "deleteWidget", id });
+  }
+
+  function updateLayout(layouts) {
+    dispatch({ type: "updateLayout", layouts });
   }
 
   return (
@@ -83,6 +92,7 @@ function BoardProvider({ children }) {
         setEditMode,
         addWidget,
         deleteWidget,
+        updateLayout,
       }}
     >
       {children}
