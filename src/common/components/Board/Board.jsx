@@ -1,10 +1,11 @@
 import ReactGridLayout from "react-grid-layout";
 import styles from "./Board.module.css";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import createWidget from "../Widgets/createWidget";
 
 import "/node_modules/react-grid-layout/css/styles.css";
 import "/node_modules/react-resizable/css/styles.css";
+import { useBoard } from "../../contexts/BoardContext/BoardContext";
 
 const GRID_SIZES = {
   small: 80,
@@ -13,7 +14,7 @@ const GRID_SIZES = {
 };
 const GRID_GUTTER = 10;
 
-let EDIT = false;
+// let EDIT = false;
 let GRID_SIZE = GRID_SIZES["large"];
 let COLS = 9;
 let ROWS = 6;
@@ -40,7 +41,12 @@ function calculateGridCount(totalSize, gridSize, gridItemMargin) {
 }
 
 function Board() {
+  const { descriptions, editMode } = useBoard();
   const containerRef = useRef(null);
+
+  function onLayoutUpdate(layouts) {
+    console.log(layouts);
+  }
 
   /** Calculate the board width and height based on the rows and cols */
   const boardWidth = COLS * (GRID_GUTTER + GRID_SIZE) + GRID_GUTTER;
@@ -49,47 +55,6 @@ function Board() {
   /** Calculate the size and position for the background (indicators) of the board */
   const bgSize = GRID_SIZE + GRID_GUTTER;
   const bgPosition = GRID_GUTTER / 2;
-
-  // let layout = [];
-
-  // for (let c = 0; c < COLS; c++) {
-  //   for (let r = 0; r < ROWS; r++) {
-  //     layout.push({
-  //       id: `${r}${c}`,
-  //       type: "base",
-  //       layout: { x: c, y: r, w: 1, h: 1 },
-  //     });
-  //   }
-  // }
-
-  let layout = [
-    {
-      id: "a",
-      type: "base",
-      layout: { x: 0, y: 1, w: 1, h: 1 },
-      state: {},
-    },
-    {
-      id: "b",
-      type: "button",
-      layout: { x: 1, y: 1, w: 1, h: 1 },
-      state: {
-        label: "Mute",
-        fontSize: "fit",
-      },
-    },
-    {
-      id: "c",
-      type: "label",
-      layout: { x: 0, y: 0, w: 2, h: 1 },
-      state: {
-        label: "My label",
-        fontSize: "fit",
-        align: "center",
-        showBorders: false,
-      },
-    },
-  ];
 
   useEffect(() => {
     /** Calculate the space available for the board */
@@ -110,7 +75,7 @@ function Board() {
       <ReactGridLayout
         className={styles.board}
         style={{
-          backgroundImage: `${EDIT ? "" : "none"}`,
+          backgroundImage: `${editMode ? "" : "none"}`,
           backgroundSize: `${bgSize}px ${bgSize}px`,
           backgroundPosition: `top ${bgPosition}px left ${bgPosition}px`,
           width: boardWidth,
@@ -122,10 +87,20 @@ function Board() {
         width={boardWidth}
         compactType={null}
         autoSize={false}
-        isDraggable={EDIT}
-        isResizable={EDIT}
+        isDraggable={editMode}
+        isResizable={editMode}
+        onResizeStop={onLayoutUpdate}
+        onDragStop={onLayoutUpdate}
       >
-        {layout.map((l) => createWidget(l))}
+        {/* {descriptions.map((l) => createWidget(l))} */}
+        {/* {Object.entries(descriptions).reduce((acc, curr) => {
+          const [id, desc] = curr;
+          return [...acc, createWidget({ ...desc, id })];
+        }, [])} */}
+        {Object.entries(descriptions).map((entry) => {
+          const [id, desc] = entry;
+          return createWidget({ ...desc, id });
+        })}
       </ReactGridLayout>
     </div>
   );
