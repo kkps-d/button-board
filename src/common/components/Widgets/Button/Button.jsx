@@ -1,3 +1,4 @@
+import useResizeObserver from "@react-hook/resize-observer";
 import { useBoard } from "../../../contexts/BoardContext/BoardContext";
 import fitToContainer from "../../../fitToContainer";
 import styles from "./Button.module.css";
@@ -26,6 +27,12 @@ function Button({ description }) {
       ref.current.style.fontSize = fontSize;
     }
   }, [label, fontSize]);
+
+  useResizeObserver(ref, (entry) => {
+    if (fontSize == "fit") {
+      fitToContainer(ref.current);
+    }
+  });
 
   return (
     <div
