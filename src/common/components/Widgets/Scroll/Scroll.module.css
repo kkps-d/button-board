@@ -1,8 +1,56 @@
 .scroll {
-  border: 1px solid;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
+  padding: 15px;
+
+  border: 1px solid;
+  user-select: none;
+
+  transition-property: border-color box-shadow background-color color;
   border-color: var(--color-widget-border);
   box-shadow: none;
   background-color: var(--color-widget-background);
   color: var(--color-font);
+  transition-duration: 200ms;
+}
+
+.scroll.pressed {
+  border-color: var(--color-widget-border-pressed);
+  box-shadow: 0px 0px 4px 0px #fff;
+  background-color: var(--color-widget-subbackground-pressed);
+  color: var(--color-widget-font-pressed);
+  transition-duration: 0ms;
+}
+
+.scroll > canvas {
+  flex-grow: 1;
+  border-radius: 20px;
+
+  box-sizing: border-box;
+  border: 1px solid;
+
+  transition-property: border-color box-shadow background-color color;
+  border-color: var(--color-widget-border);
+  box-shadow: none;
+  background-color: var(--color-widget-background);
+  color: var(--color-font);
+  transition-duration: 200ms;
+}
+
+.scroll.pressed > canvas {
+  border-color: var(--color-widget-border-pressed);
+  background-color: var(--color-widget-background-pressed);
+  color: var(--color-widget-font-pressed);
+  transition-duration: 0ms;
+}
+
+.scroll > label {
+  text-align: center;
+}
+
+.scroll.pressed > label {
+  text-align: center;
+  color: var(--color-widget-font-pressed);
 }
