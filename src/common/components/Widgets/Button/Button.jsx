@@ -10,13 +10,13 @@ function Button({ description }) {
 
   const { label = "My button", fontSize = "fit" } = description.state;
 
-  const pointerDown = () => {
-    ref.current.classList.add(styles.pressed);
-  };
-
-  const pointerUp = () => {
+  function pointerUp() {
     ref.current.classList.remove(styles.pressed);
-  };
+  }
+
+  function pointerDown() {
+    ref.current.classList.add(styles.pressed);
+  }
 
   useEffect(() => {
     if (fontSize == "fit") {
