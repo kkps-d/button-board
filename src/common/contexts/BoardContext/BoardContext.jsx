@@ -35,7 +35,7 @@ const initialState = {
       type: "v-scroll",
       layout: { x: 0, y: 2, w: 1, h: 3 },
       state: {
-        label: "Vertical ",
+        label: "Vertical scroll with text",
       },
     },
     5: {

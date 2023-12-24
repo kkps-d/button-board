@@ -9,32 +9,31 @@ const SCROLL_RIDGE_THICKNESS = 2; // Buggy, don't change this
 const SCROLL_RIDGE_WIDTH = 0.5; // 1 is full width
 const SCROLL_RIDGE_COLOR = "#999";
 const COUNT_MAX_VALUE = 1000; // Arbitary number used to keep track of where to render ridges on canvas
+const SCROLL_SENSITIVITY = 1;
 
-function getVerticalDelta(event, sensitivity = 1) {
+function getVerticalDelta(event) {
   // Check if the event has pointer coordinates
   if (event.clientY !== undefined) {
     // Calculate the delta of vertical pointer movement since the last move event
     const vDelta =
-      (event.movementY !== undefined
+      event.movementY !== undefined
         ? event.movementY
         : event.clientY -
-          (event.targetTouches ? event.targetTouches[0].clientY : 0)) *
-      sensitivity;
+          (event.targetTouches ? event.targetTouches[0].clientY : 0);
 
     return vDelta;
   }
 }
 
-function getHorizontalDelta(event, sensitivity = 1) {
+function getHorizontalDelta(event) {
   // Check if the event has pointer coordinates
   if (event.clientX !== undefined) {
     // Calculate the delta of horizontal pointer movement since the last move event
     const hDelta =
-      (event.movementX !== undefined
+      event.movementX !== undefined
         ? event.movementX
         : event.clientX -
-          (event.targetTouches ? event.targetTouches[0].clientX : 0)) *
-      sensitivity;
+          (event.targetTouches ? event.targetTouches[0].clientX : 0);
 
     return hDelta;
   }
@@ -44,8 +43,12 @@ function keepBetween(num, min, max) {
   return (num % (max - min)) + min;
 }
 
-/** @TODO When implementing actual input functionality, invert vertical scroll so that scrolling up increases a value instead of decreasing it */
-function Scroll({ description }) {
+/**
+ * @TODO
+ * When implementing actual input functionality, invert vertical scroll so that scrolling up increases a value instead of decreasing it
+ * Also remember to apply scroll sensitivity
+ */
+function Scroll({ description, orientation }) {
   const [count, setCount] = useState(0); // Arbitary number used to keep track of where to render ridges on canvas
   const [isPointerDown, setPointerDown] = useState(false);
   const { editMode } = useBoard();
@@ -57,7 +60,12 @@ function Scroll({ description }) {
   const labelRef = useRef(null);
 
   function pointerMove(e) {
-    let delta = getVerticalDelta(e, 1);
+    let delta;
+    if (orientation === "vertical") {
+      delta = getVerticalDelta(e);
+    } else {
+      delta = getHorizontalDelta(e);
+    }
     setCount((current) => {
       let newValue = current + delta;
       if (newValue < 0) newValue = COUNT_MAX_VALUE - 1;
@@ -114,16 +122,35 @@ function Scroll({ description }) {
     if (!canvasComputedStyle) return;
 
     let { width, height } = canvasComputedStyle;
-    let canvasWidth = Number(width.slice(0, -2));
-    let canvasHeight = Number(height.slice(0, -2)) + 3 * SCROLL_EDGE_OFFSET;
+    let canvasWidth, canvasHeight;
+
+    if (orientation === "vertical") {
+      canvasWidth = Number(width.slice(0, -2));
+      canvasHeight = Number(height.slice(0, -2)) + 3 * SCROLL_EDGE_OFFSET;
+    } else {
+      canvasWidth = Number(width.slice(0, -2)) + 3 * SCROLL_EDGE_OFFSET;
+      canvasHeight = Number(height.slice(0, -2));
+    }
 
     // Calculate the number of ridges to draw
-    let numRidges = Math.ceil(
-      canvasHeight / (SCROLL_RIDGE_THICKNESS + SCROLL_RIDGE_GAP)
-    );
+    let numRidges;
+    if (orientation === "vertical") {
+      numRidges = Math.ceil(
+        canvasHeight / (SCROLL_RIDGE_THICKNESS + SCROLL_RIDGE_GAP)
+      );
+    } else {
+      numRidges = Math.ceil(
+        canvasWidth / (SCROLL_RIDGE_THICKNESS + SCROLL_RIDGE_GAP)
+      );
+    }
 
     // Calculate the width of the ridges
-    let ridgeWidth = Math.round(canvasWidth * SCROLL_RIDGE_WIDTH);
+    let ridgeWidth;
+    if (orientation === "vertical") {
+      ridgeWidth = Math.round(canvasWidth * SCROLL_RIDGE_WIDTH);
+    } else {
+      ridgeWidth = Math.round(canvasHeight * SCROLL_RIDGE_WIDTH);
+    }
 
     // Clear canvas and start a new path
     canvasCtx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -135,8 +162,14 @@ function Scroll({ description }) {
 
     // Calculate where the line starts and ends. This is to center the lines within the canvas.
     // These numbers are applied to the X axis for vertical scroll, and Y axis for horizontal scroll
-    let lineStart = canvasWidth / 2 - ridgeWidth / 2;
-    let lineEnd = canvasWidth / 2 + ridgeWidth / 2;
+    let lineStart, lineEnd;
+    if (orientation === "vertical") {
+      lineStart = canvasWidth / 2 - ridgeWidth / 2;
+      lineEnd = canvasWidth / 2 + ridgeWidth / 2;
+    } else {
+      lineStart = canvasHeight / 2 - ridgeWidth / 2;
+      lineEnd = canvasHeight / 2 + ridgeWidth / 2;
+    }
 
     // Start drawing the lines
     for (let i = 0; i < numRidges; i++) {
@@ -145,8 +178,13 @@ function Scroll({ description }) {
       let maxHeight = (i + 1) * SCROLL_RIDGE_GAP - SCROLL_EDGE_OFFSET;
       let linePosition = keepBetween(count, minHeight, maxHeight);
 
-      canvasCtx.moveTo(lineStart, linePosition);
-      canvasCtx.lineTo(lineEnd, linePosition);
+      if (orientation === "vertical") {
+        canvasCtx.moveTo(lineStart, linePosition);
+        canvasCtx.lineTo(lineEnd, linePosition);
+      } else {
+        canvasCtx.moveTo(linePosition, lineStart);
+        canvasCtx.lineTo(linePosition, lineEnd);
+      }
       // // console.log(minHeight, maxHeight, position);
     }
 

@@ -18,7 +18,11 @@ export default function createWidget(description) {
       break;
 
     case "v-scroll":
-      widget = <Scroll description={description} />;
+      widget = <Scroll description={description} orientation={"vertical"} />;
+      break;
+
+    case "h-scroll":
+      widget = <Scroll description={description} orientation={"horizontal"} />;
       break;
 
     default:
