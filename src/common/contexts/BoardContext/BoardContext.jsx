@@ -5,7 +5,7 @@ import { createContext } from "react";
 const BoardContext = createContext();
 
 const initialState = {
-  nextWidgetId: 6,
+  nextWidgetId: 8,
   editMode: false,
   descriptions: {
     1: {
@@ -33,15 +33,27 @@ const initialState = {
     },
     4: {
       type: "v-scroll",
-      layout: { x: 0, y: 0, w: 1, h: 2 },
+      layout: { x: 0, y: 2, w: 1, h: 3 },
       state: {
-        label: "Vertical scroll",
+        label: "Vertical ",
       },
     },
     5: {
       type: "v-scroll",
-      layout: { x: 1, y: 0, w: 1, h: 3 },
+      layout: { x: 1, y: 2, w: 1, h: 2 },
       state: {},
+    },
+    6: {
+      type: "h-scroll",
+      layout: { x: 2, y: 0, w: 3, h: 1 },
+      state: {},
+    },
+    7: {
+      type: "h-scroll",
+      layout: { x: 2, y: 1, w: 3, h: 1 },
+      state: {
+        label: "Horizontal scroll with text",
+      },
     },
   },
 };

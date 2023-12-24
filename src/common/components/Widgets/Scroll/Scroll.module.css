@@ -24,7 +24,8 @@
   transition-duration: 0ms;
 }
 
-.scroll > canvas {
+.scroll > .canvasContainer {
+  overflow: hidden;
   flex-grow: 1;
   border-radius: 20px;
 
@@ -39,7 +40,7 @@
   transition-duration: 200ms;
 }
 
-.scroll.pressed > canvas {
+.scroll.pressed > .canvasContainer {
   border-color: var(--color-widget-border-pressed);
   background-color: var(--color-widget-background-pressed);
   color: var(--color-widget-font-pressed);
