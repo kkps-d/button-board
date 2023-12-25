@@ -1,0 +1,83 @@
+.knob {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  border: 1px solid;
+  user-select: none;
+
+  padding: 20px;
+
+  overflow: hidden;
+
+  transition-property: border-color box-shadow background-color color;
+  border-color: var(--color-widget-border);
+  box-shadow: none;
+  background-color: var(--color-widget-background);
+  color: var(--color-font);
+  transition-duration: 200ms;
+}
+
+.knob.pressed {
+  border-color: var(--color-widget-border-pressed);
+  box-shadow: 0px 0px 4px 0px #fff;
+  background-color: var(--color-widget-subbackground-pressed);
+  color: var(--color-widget-font-pressed);
+  transition-duration: 0ms;
+}
+
+.knob > .actualKnob {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+
+  border: 1px solid;
+  border-radius: 100%;
+  flex-grow: 1;
+
+  transform: rotate(20deg);
+
+  transition-property: border-color background-color color;
+  border-color: var(--color-widget-border);
+  background-color: var(--color-widget-background);
+  color: var(--color-font);
+  transition-duration: 200ms;
+}
+
+.knob.pressed > .actualKnob {
+  border-color: var(--color-widget-border-pressed);
+  background-color: var(--color-widget-background-pressed);
+  color: var(--color-widget-font-pressed);
+  transition-duration: 0ms;
+}
+
+.knob .dent {
+  width: 12px;
+  height: 12px;
+  border-radius: 100%;
+}
+
+.knob .notch {
+  width: 6px;
+  height: 16px;
+  border-radius: 6px;
+}
+
+.knob .dent,
+.knob .notch {
+  border: 1px solid;
+
+  transition-property: border-color background-color color;
+  border-color: var(--color-widget-border);
+  background-color: var(--color-widget-background);
+  color: var(--color-widget-font-pressed);
+  transition-duration: 200ms;
+}
+
+.knob.pressed .dent,
+.knob.pressed .notch {
+  border-color: var(--color-widget-subbackground-pressed);
+  background-color: var(--color-widget-subbackground-pressed);
+  color: var(--color-widget-font-pressed);
+  transition-duration: 0ms;
+}

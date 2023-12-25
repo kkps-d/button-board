@@ -1,4 +1,5 @@
 import Button from "./Button/Button";
+import Knob from "./Knob/Knob";
 import Label from "./Label/Label";
 import Scroll from "./Scroll/Scroll";
 
@@ -23,6 +24,10 @@ export default function createWidget(description) {
 
     case "h-scroll":
       widget = <Scroll description={description} orientation={"horizontal"} />;
+      break;
+
+    case "free-knob":
+      widget = <Knob description={description} type={"free"} />;
       break;
 
     default:

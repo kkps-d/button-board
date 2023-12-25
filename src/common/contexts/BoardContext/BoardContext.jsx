@@ -5,7 +5,7 @@ import { createContext } from "react";
 const BoardContext = createContext();
 
 const initialState = {
-  nextWidgetId: 8,
+  nextWidgetId: 10,
   editMode: false,
   descriptions: {
     1: {
@@ -53,6 +53,18 @@ const initialState = {
       layout: { x: 2, y: 1, w: 3, h: 1 },
       state: {
         label: "Horizontal scroll with text",
+      },
+    },
+    8: {
+      type: "free-knob",
+      layout: { x: 2, y: 2, w: 2, h: 2 },
+      state: {},
+    },
+    9: {
+      type: "free-knob",
+      layout: { x: 2, y: 2, w: 2, h: 2 },
+      state: {
+        label: "Free knob",
       },
     },
   },
