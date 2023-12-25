@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import FlexExpander from "../../../common/components/FlexExpander";
+import FlexExpander from "../../../common/components/FlexExpander/FlexExpander";
 import styles from "./Nav.module.css";
 import NavButton from "./NavButton";
 
