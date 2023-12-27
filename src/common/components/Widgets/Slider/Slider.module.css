@@ -55,6 +55,8 @@
   writing-mode: vertical-lr;
   flex-grow: 1;
   background-color: transparent;
+
+  -moz-transform: rotate(180deg);
 }
 
 .slider input[type="range"]:focus {
