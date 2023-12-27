@@ -2,6 +2,7 @@ import Button from "./Button/Button";
 import Knob from "./Knob/Knob";
 import Label from "./Label/Label";
 import Scroll from "./Scroll/Scroll";
+import Test from "./Test/Test";
 
 /** Returns the wrapping div required for react-grid-layout and the selected widget component */
 export default function createWidget(description) {
@@ -28,6 +29,10 @@ export default function createWidget(description) {
 
     case "free-knob":
       widget = <Knob description={description} type={"free"} />;
+      break;
+
+    case "test":
+      widget = <Test description={description} />;
       break;
 
     default:

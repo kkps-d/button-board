@@ -9,7 +9,7 @@ const initialState = {
   editMode: false,
   descriptions: {
     1: {
-      type: "invalid",
+      type: "test",
       layout: { x: 0, y: 1, w: 1, h: 1 },
       state: {},
     },
