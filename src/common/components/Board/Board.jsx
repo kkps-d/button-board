@@ -92,11 +92,6 @@ function Board() {
         onResizeStop={onLayoutUpdate}
         onDragStop={onLayoutUpdate}
       >
-        {/* {descriptions.map((l) => createWidget(l))} */}
-        {/* {Object.entries(descriptions).reduce((acc, curr) => {
-          const [id, desc] = curr;
-          return [...acc, createWidget({ ...desc, id })];
-        }, [])} */}
         {Object.entries(descriptions).map((entry) => {
           const [id, desc] = entry;
           return createWidget({ ...desc, id });
