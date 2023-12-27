@@ -37,6 +37,7 @@
 .label {
   flex-shrink: 0;
   text-align: center;
+  font-size: 14px;
   font-weight: bold;
 
   transition-property: color;

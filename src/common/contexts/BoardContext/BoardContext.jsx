@@ -5,7 +5,7 @@ import { createContext } from "react";
 const BoardContext = createContext();
 
 const initialState = {
-  nextWidgetId: 10,
+  nextWidgetId: 12,
   editMode: false,
   descriptions: {
     1: {
@@ -40,7 +40,7 @@ const initialState = {
     },
     5: {
       type: "v-scroll",
-      layout: { x: 1, y: 2, w: 1, h: 2 },
+      layout: { x: 1, y: 2, w: 1, h: 3 },
       state: {},
     },
     6: {
@@ -57,16 +57,36 @@ const initialState = {
     },
     8: {
       type: "free-knob",
-      layout: { x: 2, y: 2, w: 1, h: 1 },
+      layout: { x: 2, y: 2, w: 2, h: 2 },
       state: {
         label: "Free knob",
       },
     },
     9: {
       type: "free-knob",
-      layout: { x: 2, y: 2, w: 2, h: 2 },
+      layout: { x: 0, y: 5, w: 1, h: 1 },
       state: {
         label: "Free knob",
+      },
+    },
+    10: {
+      type: "fixed-knob",
+      layout: { x: 2, y: 4, w: 2, h: 2 },
+      state: {
+        label: "Fixed 1",
+        min: 0,
+        max: 100,
+        degrees: 270,
+      },
+    },
+    11: {
+      type: "fixed-knob",
+      layout: { x: 1, y: 5, w: 1, h: 1 },
+      state: {
+        label: "Fixed 2",
+        min: 0,
+        max: 100,
+        degrees: 200,
       },
     },
   },

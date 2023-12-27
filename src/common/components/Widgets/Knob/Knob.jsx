@@ -11,7 +11,27 @@ function Knob({ description, type }) {
   const knobRef = useRef(null);
   const [isPointerDown, setPointerDown] = useState(false);
   const { editMode } = useBoard();
-  const [angle, setAngle] = useState(0);
+
+  let initialAngle = 0;
+
+  let minDegree, maxDegree;
+  let calculateDistance = null;
+  if (type === "fixed") {
+    let half = description.state.degrees / 2;
+    minDegree = 360 - half;
+    maxDegree = 0 + half;
+    initialAngle = minDegree;
+
+    calculateDistance = (value) => {
+      if (value >= minDegree) {
+        return value - minDegree;
+      } else {
+        return value + half;
+      }
+    };
+  }
+
+  const [angle, setAngle] = useState(initialAngle);
 
   function pointerUp(e) {
     // Clear the previous angle so that the knob doesnt jump
@@ -77,9 +97,23 @@ function Knob({ description, type }) {
 
     setAngle((current) => {
       // console.log(current + delta);
-      let newVal = current + delta;
-      if (newVal < 0) newVal = 359;
-      return newVal % 360;
+      let newDegree = current + delta;
+      if (newDegree < 0) newDegree = 359;
+      newDegree = newDegree % 360;
+
+      // if (minDegree <= newDegree && newDegree <= 360) {
+      //   console.log(newDegree);
+      //   return newDegree;
+      // }
+      if (
+        type === "fixed" &&
+        newDegree <= minDegree &&
+        newDegree >= maxDegree
+      ) {
+        return current;
+      }
+
+      return newDegree;
     });
 
     // console.log(delta);
@@ -113,7 +147,7 @@ function Knob({ description, type }) {
     >
       <div className={styles.knobContainer} ref={knobContainerRef}>
         <div className={styles.actualKnob} ref={knobRef}>
-          <span className={styles.notch}></span>
+          <span className={type === "free" ? styles.dent : styles.notch}></span>
         </div>
       </div>
       {label ? <div className={styles.label}>{label}</div> : null}

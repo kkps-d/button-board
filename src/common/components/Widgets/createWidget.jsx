@@ -31,6 +31,10 @@ export default function createWidget(description) {
       widget = <Knob description={description} type={"free"} />;
       break;
 
+    case "fixed-knob":
+      widget = <Knob description={description} type={"fixed"} />;
+      break;
+
     case "test":
       widget = <Test description={description} />;
       break;
