@@ -9,13 +9,8 @@ const initialState = {
   editMode: false,
   descriptions: {
     1: {
-      type: "test",
-      layout: { x: 0, y: 1, w: 1, h: 1 },
-      state: {},
-    },
-    2: {
       type: "button",
-      layout: { x: 1, y: 1, w: 1, h: 1 },
+      layout: { x: 0, y: 1, w: 1, h: 1 },
       state: {
         label: "Mute",
         fontSize: "fit",
@@ -23,7 +18,7 @@ const initialState = {
     },
     3: {
       type: "label",
-      layout: { x: 0, y: 0, w: 2, h: 1 },
+      layout: { x: 0, y: 0, w: 1, h: 1 },
       state: {
         label: "My label",
         fontSize: "fit",
@@ -45,12 +40,12 @@ const initialState = {
     },
     6: {
       type: "h-scroll",
-      layout: { x: 2, y: 0, w: 3, h: 1 },
+      layout: { x: 1, y: 0, w: 3, h: 1 },
       state: {},
     },
     7: {
       type: "h-scroll",
-      layout: { x: 2, y: 1, w: 3, h: 1 },
+      layout: { x: 1, y: 1, w: 3, h: 1 },
       state: {
         label: "Horizontal scroll with text",
       },
@@ -65,9 +60,7 @@ const initialState = {
     9: {
       type: "free-knob",
       layout: { x: 0, y: 5, w: 1, h: 1 },
-      state: {
-        label: "Free knob",
-      },
+      state: {},
     },
     10: {
       type: "fixed-knob",
@@ -83,10 +76,43 @@ const initialState = {
       type: "fixed-knob",
       layout: { x: 1, y: 5, w: 1, h: 1 },
       state: {
-        label: "Fixed 2",
         min: 0,
         max: 100,
-        degrees: 200,
+        degrees: 300,
+      },
+    },
+    12: {
+      type: "v-slider",
+      layout: { x: 4, y: 0, w: 1, h: 3, minH: 2 },
+      state: {
+        label: "Vertical slider",
+        min: 0,
+        max: 100,
+      },
+    },
+    13: {
+      type: "v-slider",
+      layout: { x: 5, y: 0, w: 1, h: 3, minH: 2 },
+      state: {
+        min: 0,
+        max: 100,
+      },
+    },
+    14: {
+      type: "h-slider",
+      layout: { x: 4, y: 3, w: 2, h: 1, minW: 2 },
+      state: {
+        min: 0,
+        max: 100,
+      },
+    },
+    15: {
+      type: "h-slider",
+      layout: { x: 4, y: 4, w: 2, h: 1, minW: 2 },
+      state: {
+        label: "Horizontal slider",
+        min: 0,
+        max: 100,
       },
     },
   },

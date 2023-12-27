@@ -40,6 +40,10 @@ export default function createWidget(description) {
       widget = <Slider description={description} orientation={"vertical"} />;
       break;
 
+    case "h-slider":
+      widget = <Slider description={description} orientation={"horizontal"} />;
+      break;
+
     case "test":
       widget = <Test description={description} />;
       break;

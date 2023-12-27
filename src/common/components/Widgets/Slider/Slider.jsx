@@ -23,10 +23,15 @@ function Slider({ description, orientation }) {
       ref={widgetRef}
       onPointerDown={editMode ? null : pointerDown}
       onPointerUp={editMode ? null : pointerUp}
-      className={`widget ${styles.slider}`}
+      className={`widget ${styles.slider} ${
+        orientation === "horizontal" ? styles.horizontal : ""
+      }`}
     >
       <div className={styles.label}>
-        <div className={styles.userLabel}>{label}</div>
+        <div className={styles.userLabel}>
+          {label}
+          {orientation === "horizontal" && label ? " • " : null}
+        </div>
         <div className={styles.value}>{value}</div>
       </div>
       <input
@@ -36,7 +41,6 @@ function Slider({ description, orientation }) {
         value={value}
         onInput={(e) => setValue(e.target.value)}
         type="range"
-        orient="vertical"
         style={editMode ? { pointerEvents: "none" } : null}
       />
     </div>

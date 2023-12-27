@@ -33,6 +33,11 @@
   gap: 5px;
 }
 
+.slider.horizontal .label {
+  flex-direction: row;
+  justify-content: center;
+}
+
 .slider .label .userLabel,
 .slider .label .value {
   transition-property: color;
@@ -52,11 +57,18 @@
 
 .slider input[type="range"] {
   -webkit-appearance: none;
+  min-height: 0;
+  min-width: 0;
   writing-mode: vertical-lr;
   flex-grow: 1;
   background-color: transparent;
 
   -moz-transform: rotate(180deg);
+}
+
+.slider.horizontal input[type="range"] {
+  writing-mode: horizontal-tb;
+  -moz-transform: rotate(0deg);
 }
 
 .slider input[type="range"]:focus {
@@ -75,6 +87,10 @@
   transition-duration: 200ms;
 }
 
+.slider.horizontal input[type="range"]::-webkit-slider-runnable-track {
+  height: 8px;
+}
+
 .slider.pressed input[type="range"]::-webkit-slider-runnable-track {
   background-color: var(--color-widget-background-pressed);
   border-color: var(--color-widget-border-pressed);
@@ -83,7 +99,7 @@
 
 .slider input[type="range"]::-moz-range-track {
   cursor: pointer;
-  width: 8px;
+  width: 6px;
   height: 100%;
   border: 1px solid;
   border-radius: 10px;
@@ -92,6 +108,11 @@
   background-color: var(--color-widget-background);
   border-color: var(--color-widget-border);
   transition-duration: 200ms;
+}
+
+.slider.horizontal input[type="range"]::-moz-range-track {
+  height: 6px;
+  width: 100%;
 }
 
 .slider.pressed input[type="range"]::-moz-range-track {
@@ -118,6 +139,13 @@
   transition-duration: 200ms;
 }
 
+.slider.horizontal input[type="range"]::-webkit-slider-thumb {
+  width: 15px;
+  height: 45px;
+  margin-left: 0;
+  margin-top: -19px;
+}
+
 .slider.pressed input[type="range"]::-webkit-slider-thumb {
   transition-property: background-color, border-color;
   background-color: var(--color-widget-background-pressed);
@@ -134,12 +162,16 @@
 
   height: 15px;
   width: 45px;
-  margin-left: -19px;
 
   transition-property: background-color, border-color;
   background-color: var(--color-widget-background);
   border-color: var(--color-widget-border);
   transition-duration: 200ms;
+}
+
+.slider.horizontal input[type="range"]::-moz-range-thumb {
+  width: 15px;
+  height: 45px;
 }
 
 .slider.pressed input[type="range"]::-moz-range-thumb {
