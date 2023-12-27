@@ -3,7 +3,7 @@ import styles from "./Knob.module.css";
 import { useBoard } from "../../../contexts/BoardContext/BoardContext";
 import useResizeObserver from "@react-hook/resize-observer";
 
-const DEAD_ZONE = 15;
+const DEAD_ZONE = 10;
 
 function Knob({ description, type }) {
   const widgetRef = useRef(null);
@@ -113,7 +113,7 @@ function Knob({ description, type }) {
     >
       <div className={styles.knobContainer} ref={knobContainerRef}>
         <div className={styles.actualKnob} ref={knobRef}>
-          <span className={styles.dent}></span>
+          <span className={styles.notch}></span>
         </div>
       </div>
       {label ? <div className={styles.label}>{label}</div> : null}

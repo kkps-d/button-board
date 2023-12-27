@@ -57,8 +57,10 @@ const initialState = {
     },
     8: {
       type: "free-knob",
-      layout: { x: 2, y: 2, w: 2, h: 2 },
-      state: {},
+      layout: { x: 2, y: 2, w: 1, h: 1 },
+      state: {
+        label: "Free knob",
+      },
     },
     9: {
       type: "free-knob",

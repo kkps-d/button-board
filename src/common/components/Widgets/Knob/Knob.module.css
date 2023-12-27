@@ -3,12 +3,12 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 10px;
+  gap: 6%;
 
   border: 1px solid;
   user-select: none;
 
-  padding: 20px;
+  padding: 8%;
   overflow: hidden;
 
   transition-property: border-color, box-shadow, background-color;
@@ -37,6 +37,7 @@
 .label {
   flex-shrink: 0;
   text-align: center;
+  font-weight: bold;
 
   transition-property: color;
   color: var(--color-font);
@@ -59,7 +60,7 @@
 .actualKnob {
   display: flex;
   justify-content: center;
-  padding: 10px;
+  padding: 6%;
 
   border: 1px solid;
   border-radius: 100%;
