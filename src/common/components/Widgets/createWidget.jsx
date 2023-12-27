@@ -2,6 +2,7 @@ import Button from "./Button/Button";
 import Knob from "./Knob/Knob";
 import Label from "./Label/Label";
 import Scroll from "./Scroll/Scroll";
+import Slider from "./Slider/Slider";
 import Test from "./Test/Test";
 
 /** Returns the wrapping div required for react-grid-layout and the selected widget component */
@@ -33,6 +34,10 @@ export default function createWidget(description) {
 
     case "fixed-knob":
       widget = <Knob description={description} type={"fixed"} />;
+      break;
+
+    case "v-slider":
+      widget = <Slider description={description} orientation={"vertical"} />;
       break;
 
     case "test":
