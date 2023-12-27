@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./Knob.module.css";
 import { useBoard } from "../../../contexts/BoardContext/BoardContext";
+import useResizeObserver from "@react-hook/resize-observer";
 
 const DEAD_ZONE = 15;
 
-function Knob() {
+function Knob({ description, type }) {
   const widgetRef = useRef(null);
+  const knobContainerRef = useRef(null);
   const knobRef = useRef(null);
   const [isPointerDown, setPointerDown] = useState(false);
   const { editMode } = useBoard();
@@ -34,9 +36,8 @@ function Knob() {
     // Find the coordinates from center
     const fromCenterX = clientX - rect.width / 2;
     const fromCenterY = clientY - rect.height / 2;
-    console.log(fromCenterX, fromCenterY);
 
-    // If the coordinates are within the deadzone, return
+    // If the coordinates are within the deadzone, clear the last angle and return
     if (
       Math.abs(fromCenterX) < DEAD_ZONE &&
       Math.abs(fromCenterY) < DEAD_ZONE
@@ -88,6 +89,19 @@ function Knob() {
     knobRef.current.style.transform = `rotate(${angle}deg)`;
   }, [angle, knobRef]);
 
+  const { label } = description.state;
+
+  useResizeObserver(knobContainerRef.current, (entry) => {
+    const { width, height } = entry.target.getBoundingClientRect();
+    if (width < height) {
+      entry.target.classList.add(styles.heightIsGreater);
+      entry.target.classList.remove(styles.widthIsGreater);
+    } else {
+      entry.target.classList.add(styles.widthIsGreater);
+      entry.target.classList.remove(styles.heightIsGreater);
+    }
+  });
+
   return (
     <div
       ref={widgetRef}
@@ -97,10 +111,12 @@ function Knob() {
       onPointerUp={editMode ? null : pointerUp}
       onPointerLeave={pointerUp}
     >
-      <div className={`${styles.actualKnob}`} ref={knobRef}>
-        <span className={styles.dent}></span>
-        <span>{angle.toFixed(0)}</span>
+      <div className={styles.knobContainer} ref={knobContainerRef}>
+        <div className={styles.actualKnob} ref={knobRef}>
+          <span className={styles.dent}></span>
+        </div>
       </div>
+      {label ? <div className={styles.label}>{label}</div> : null}
     </div>
   );
 }

@@ -1,5 +1,7 @@
 .knob {
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
   gap: 10px;
 
@@ -7,14 +9,12 @@
   user-select: none;
 
   padding: 20px;
-
   overflow: hidden;
 
-  transition-property: border-color box-shadow background-color color;
+  transition-property: border-color, box-shadow, background-color;
   border-color: var(--color-widget-border);
   box-shadow: none;
   background-color: var(--color-widget-background);
-  color: var(--color-font);
   transition-duration: 200ms;
 }
 
@@ -22,29 +22,61 @@
   border-color: var(--color-widget-border-pressed);
   box-shadow: 0px 0px 4px 0px #fff;
   background-color: var(--color-widget-subbackground-pressed);
+  transition-duration: 0ms;
+}
+
+.knobContainer {
+  width: 100%;
+  flex-grow: 1;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.label {
+  flex-shrink: 0;
+  text-align: center;
+
+  transition-property: color;
+  color: var(--color-font);
+  transition-duration: 200ms;
+}
+
+.knob.pressed .label {
   color: var(--color-widget-font-pressed);
   transition-duration: 0ms;
 }
 
-.knob > .actualKnob {
+.knobContainer.heightIsGreater {
+  flex-direction: row;
+}
+
+.knobContainer.widthIsGreater {
+  flex-direction: column;
+}
+
+.actualKnob {
   display: flex;
   justify-content: center;
   padding: 10px;
 
   border: 1px solid;
   border-radius: 100%;
+
+  aspect-ratio: 1/1;
+  max-width: 100%;
+  max-height: 100%;
   flex-grow: 1;
 
-  transform: rotate(20deg);
-
-  transition-property: border-color background-color color;
+  transition-property: border-color, background-color, color;
   border-color: var(--color-widget-border);
   background-color: var(--color-widget-background);
   color: var(--color-font);
   transition-duration: 200ms;
 }
 
-.knob.pressed > .actualKnob {
+.knob.pressed .actualKnob {
   border-color: var(--color-widget-border-pressed);
   background-color: var(--color-widget-background-pressed);
   color: var(--color-widget-font-pressed);
@@ -67,7 +99,7 @@
 .knob .notch {
   border: 1px solid;
 
-  transition-property: border-color background-color color;
+  transition-property: border-color, background-color, color;
   border-color: var(--color-widget-border);
   background-color: var(--color-widget-background);
   color: var(--color-widget-font-pressed);
