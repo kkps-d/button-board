@@ -59,7 +59,11 @@ function Button({ description, type = "button" }) {
       </div>
       {type === "toggle" ? (
         <div
-          style={{ backgroundColor: toggled ? toggleOnColor : toggleOffColor }}
+          style={{
+            backgroundColor: toggled ? toggleOnColor : toggleOffColor,
+            borderColor: toggled ? toggleOnColor : "initial",
+            boxShadow: toggled ? `0px 0px 5px 1px ${toggleOnColor}` : `none`,
+          }}
           className={styles.indicator}
         ></div>
       ) : null}
