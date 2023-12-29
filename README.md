@@ -4,6 +4,15 @@ The ultimate macro pad web app
 
 <u>**Note: Look into the compound component pattern in the react course. This may be useful in the future**</u>
 
+## In development
+
+- [ ] Move more hard coded Board stuff into BoardContext
+
+## Developer tasks
+
+- [ ] Test for all sizes of grid
+-
+
 # Minimum Viable Product
 
 ## Features
