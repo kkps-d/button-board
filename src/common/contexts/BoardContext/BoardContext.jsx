@@ -9,7 +9,7 @@ import PLACEHOLDER_IMAGE_BLACK_URL from "../../static/placeholder-black.png";
 const BoardContext = createContext();
 
 const initialState = {
-  nextWidgetId: 12,
+  nextWidgetId: 19,
   editMode: false,
   descriptions: {
     1: {
@@ -127,6 +127,26 @@ const initialState = {
         labelPosition: "bottom",
         src: PLACEHOLDER_IMAGE_URL,
         imageFit: "cover",
+      },
+    },
+    17: {
+      type: "toggle",
+      layout: { x: 4, y: 5, w: 1, h: 1 },
+      state: {
+        label: "Mute",
+        labelToggled: "Muted",
+        fontSize: "fit",
+      },
+    },
+    18: {
+      type: "toggle",
+      layout: { x: 5, y: 5, w: 1, h: 1 },
+      state: {
+        label: "Deafen",
+        labelToggled: "Deafened",
+        toggleOffColor: "#ff0000",
+        toggleOnColor: "#26a4ed",
+        fontSize: "fit",
       },
     },
   },

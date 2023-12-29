@@ -17,6 +17,10 @@ export default function createWidget(description) {
       widget = <Button description={description} />;
       break;
 
+    case "toggle":
+      widget = <Button description={description} type={"toggle"} />;
+      break;
+
     case "label":
       widget = <Label description={description} />;
       break;
