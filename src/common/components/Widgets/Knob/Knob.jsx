@@ -4,6 +4,8 @@ import { useBoard } from "../../../contexts/BoardContext/BoardContext";
 import useResizeObserver from "@react-hook/resize-observer";
 
 const DEAD_ZONE = 10;
+const LONG_PRESS_DURATION_MS = 500;
+const LONG_PRESS_ALLOWED_MOVEMENT_PX = 5;
 
 function Knob({ description, type }) {
   const widgetRef = useRef(null);
@@ -11,6 +13,7 @@ function Knob({ description, type }) {
   const knobRef = useRef(null);
   const [isPointerDown, setPointerDown] = useState(false);
   const { editMode } = useBoard();
+  const [timeoutId, setTimeoutId] = useState(null);
 
   let initialAngle = 0;
 
@@ -37,11 +40,29 @@ function Knob({ description, type }) {
     // Clear the previous angle so that the knob doesnt jump
     e.target._lastAngle = undefined;
 
+    // Clear the previous coordinates for detecting long presses
+    e.target._coords = undefined;
+
+    // Ignore long press if pointer is up before timeout
+    if (type === "fixed") {
+      clearTimeout(timeoutId);
+      setTimeoutId(false);
+    }
+
     widgetRef.current.classList.remove(styles.pressed);
     setPointerDown(false);
   }
 
   function pointerDown() {
+    // Long pressing resets knob to its initial angle
+    if (type === "fixed") {
+      let id = setTimeout(() => {
+        setAngle(initialAngle);
+        console.log("long press");
+      }, LONG_PRESS_DURATION_MS);
+      setTimeoutId(id);
+    }
+
     widgetRef.current.classList.add(styles.pressed);
     setPointerDown(true);
   }
@@ -52,6 +73,28 @@ function Knob({ description, type }) {
     const rect = target.getBoundingClientRect();
     const clientX = e.clientX - rect.left;
     const clientY = e.clientY - rect.top;
+
+    // Ignore long press if pointer is up before timeout
+    if (type === "fixed") {
+      // Compare the current coordinate to the previous
+      if (target._coords) {
+        const { x, y } = target._coords;
+        let deltaX = Math.abs(clientX - x);
+        let deltaY = Math.abs(clientY - y);
+
+        // If the pointer has moved too much, ignore long press
+        if (
+          deltaX > LONG_PRESS_ALLOWED_MOVEMENT_PX ||
+          deltaY > LONG_PRESS_ALLOWED_MOVEMENT_PX
+        ) {
+          // clearTimeout(timeoutId);
+          clearTimeout(timeoutId);
+          setTimeoutId(false);
+        }
+      } else {
+        target._coords = { x: clientX, y: clientY };
+      }
+    }
 
     // Find the coordinates from center
     const fromCenterX = clientX - rect.width / 2;
@@ -101,10 +144,6 @@ function Knob({ description, type }) {
       if (newDegree < 0) newDegree = 359;
       newDegree = newDegree % 360;
 
-      // if (minDegree <= newDegree && newDegree <= 360) {
-      //   console.log(newDegree);
-      //   return newDegree;
-      // }
       if (
         type === "fixed" &&
         newDegree <= minDegree &&
