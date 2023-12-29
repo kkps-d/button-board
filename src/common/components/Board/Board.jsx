@@ -12,6 +12,7 @@ const GRID_SIZES = {
   medium: 90,
   large: 100,
 };
+// Don't change this, this will break grid squareness
 const GRID_GUTTER = 10;
 
 // let EDIT = false;
