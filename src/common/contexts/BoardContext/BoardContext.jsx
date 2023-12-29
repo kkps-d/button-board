@@ -2,6 +2,10 @@ import { useContext } from "react";
 import { useReducer } from "react";
 import { createContext } from "react";
 
+import PLACEHOLDER_IMAGE_URL from "../../static/placeholder.png";
+import PLACEHOLDER_IMAGE_WHITE_URL from "../../static/placeholder-white.png";
+import PLACEHOLDER_IMAGE_BLACK_URL from "../../static/placeholder-black.png";
+
 const BoardContext = createContext();
 
 const initialState = {
@@ -113,6 +117,16 @@ const initialState = {
         label: "Horizontal slider",
         min: 0,
         max: 100,
+      },
+    },
+    16: {
+      type: "image-frame",
+      layout: { x: 6, y: 0, w: 3, h: 2 },
+      state: {
+        label: "Forsen",
+        labelPosition: "bottom",
+        src: PLACEHOLDER_IMAGE_URL,
+        imageFit: "cover",
       },
     },
   },

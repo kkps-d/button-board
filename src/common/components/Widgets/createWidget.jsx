@@ -1,4 +1,5 @@
 import Button from "./Button/Button";
+import ImageFrame from "./ImageFrame/ImageFrame";
 import Knob from "./Knob/Knob";
 import Label from "./Label/Label";
 import Scroll from "./Scroll/Scroll";
@@ -46,6 +47,10 @@ export default function createWidget(description) {
 
     case "test":
       widget = <Test description={description} />;
+      break;
+
+    case "image-frame":
+      widget = <ImageFrame description={description} />;
       break;
 
     default:
