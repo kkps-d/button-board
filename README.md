@@ -7,11 +7,17 @@ The ultimate macro pad web app
 ## In development
 
 - [ ] Move more hard coded Board stuff into BoardContext
+- [ ] Add haptics to component
+- [ ] Add board page switching
+- [ ] Reconfigure Vite to output to multiple files for client web interface and server web interface
+- [ ] Add edit mode
+- [ ] Start prelim work on backend
+- [ ] Create an out-of-box experience
 
 ## Developer tasks
 
 - [ ] Test for all sizes of grid
--
+- [ ] Update components to support moving GRID_SIZE into context
 
 # Minimum Viable Product
 
