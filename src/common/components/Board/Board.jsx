@@ -15,46 +15,28 @@ const GRID_SIZES = {
 // Don't change this, this will break grid squareness
 const GRID_GUTTER = 10;
 
-// let EDIT = false;
-let GRID_SIZE = GRID_SIZES["large"];
-let COLS = 9;
-let ROWS = 6;
-
-let device = {
-  name: "tab s7",
-  gridSize: "large", // Small, medium, large
-  rows: 5,
-  cols: 5,
-};
-
-let board = {
-  name: "my board",
-};
-
-let widget = {
-  id: "abcd",
-  type: "button",
-};
-
 function calculateGridCount(totalSize, gridSize, gridItemMargin) {
   const gridCount = (totalSize - gridItemMargin) / (gridItemMargin + gridSize);
   return Math.floor(gridCount);
 }
 
 function Board() {
-  const { descriptions, editMode, updateLayout } = useBoard();
+  const { boards, selectedBoardIndex, editMode, updateLayout } = useBoard();
   const containerRef = useRef(null);
+
+  const { descriptions, rows, cols, gridSize } = boards[selectedBoardIndex];
+  const gridSizePx = GRID_SIZES[gridSize];
 
   function onLayoutUpdate(layouts) {
     updateLayout(layouts);
   }
 
   /** Calculate the board width and height based on the rows and cols */
-  const boardWidth = COLS * (GRID_GUTTER + GRID_SIZE) + GRID_GUTTER;
-  const boardHeight = ROWS * (GRID_GUTTER + GRID_SIZE) + GRID_GUTTER;
+  const boardWidth = cols * (GRID_GUTTER + gridSizePx) + GRID_GUTTER;
+  const boardHeight = rows * (GRID_GUTTER + gridSizePx) + GRID_GUTTER;
 
   /** Calculate the size and position for the background (indicators) of the board */
-  const bgSize = GRID_SIZE + GRID_GUTTER;
+  const bgSize = gridSizePx + GRID_GUTTER;
   const bgPosition = GRID_GUTTER / 2;
 
   useEffect(() => {
@@ -65,11 +47,21 @@ function Board() {
     const availHeight = totalHeight - GRID_GUTTER * 2;
 
     /** Calculate the rows and columns that will fit in the space */
-    const rows = calculateGridCount(availHeight, GRID_SIZE, GRID_GUTTER);
-    const cols = calculateGridCount(availWidth, GRID_SIZE, GRID_GUTTER);
+    const recommendedRows = calculateGridCount(
+      availHeight,
+      gridSizePx,
+      GRID_GUTTER
+    );
+    const recommendedCols = calculateGridCount(
+      availWidth,
+      gridSizePx,
+      GRID_GUTTER
+    );
 
-    console.log(`Recommended: ${rows} rows, ${cols} cols`);
-  }, [GRID_SIZE, COLS, ROWS]);
+    console.log(
+      `Recommended: ${recommendedRows} rows, ${recommendedCols} cols`
+    );
+  }, [gridSizePx, cols, rows]);
 
   return (
     <div className={styles.container} ref={containerRef}>
@@ -82,9 +74,9 @@ function Board() {
           width: boardWidth,
           height: boardHeight,
         }}
-        cols={COLS}
-        maxRows={ROWS}
-        rowHeight={GRID_SIZE}
+        cols={cols}
+        maxRows={rows}
+        rowHeight={gridSizePx}
         width={boardWidth}
         compactType={null}
         autoSize={false}
