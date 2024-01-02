@@ -11,6 +11,7 @@ function DebugPanel() {
     addWidget,
     deleteWidget,
     setDimensions,
+    setGridSize,
   } = useBoard();
 
   function toggleEditMode() {
@@ -106,7 +107,7 @@ function DebugPanel() {
         })}
       </select>
       <label>Grid size</label>
-      <select value={gridSize}>
+      <select value={gridSize} onChange={(e) => setGridSize(e.target.value)}>
         <option value="small">Small</option>
         <option value="medium">Medium</option>
         <option value="large">Large</option>

@@ -37,9 +37,13 @@ function reducer(state, action) {
       return { ...state, boards };
 
     case "setDimensions":
-      console.log(action);
       currentBoard.rows = action.rows;
       currentBoard.cols = action.cols;
+
+      return { ...state, boards };
+
+    case "setGridSize":
+      currentBoard.gridSize = action.gridSize;
 
       return { ...state, boards };
 
@@ -79,20 +83,23 @@ function BoardProvider({ children }) {
   /**
    * @param {"small" | "medium" | "large"} size
    */
-  function setBoardGridSize(size) {}
+  function setGridSize(gridSize) {
+    dispatch({ type: "setGridSize", gridSize });
+  }
 
   return (
     <BoardContext.Provider
       value={{
-        editMode,
-        descriptions,
         boards,
-        selectBoard,
+        descriptions,
+        editMode,
         selectedBoardIndex,
-        setEditMode,
-        setDimensions,
         addWidget,
         deleteWidget,
+        selectBoard,
+        setEditMode,
+        setDimensions,
+        setGridSize,
         updateLayout,
       }}
     >
