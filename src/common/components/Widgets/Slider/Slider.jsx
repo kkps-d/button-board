@@ -3,7 +3,7 @@ import styles from "./Slider.module.css";
 import { useBoard } from "../../../contexts/BoardContext/BoardContext";
 import { useState } from "react";
 
-function Slider({ description, orientation }) {
+function Slider({ description, orientation, gridSize }) {
   const { label, min, max, step } = description.state;
 
   const widgetRef = useRef(null);
@@ -25,7 +25,7 @@ function Slider({ description, orientation }) {
       onPointerUp={editMode ? null : pointerUp}
       className={`widget ${styles.slider} ${
         orientation === "horizontal" ? styles.horizontal : ""
-      }`}
+      } ${styles[gridSize]}`}
     >
       <div className={styles.label}>
         <div className={styles.userLabel}>
