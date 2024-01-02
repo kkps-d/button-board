@@ -2,13 +2,22 @@ import { useEffect, useState } from "react";
 import FlexExpander from "../../../common/components/FlexExpander/FlexExpander";
 import styles from "./Nav.module.css";
 import NavButton from "./NavButton";
+import { useBoard } from "../../../common/contexts/BoardContext/BoardContext";
 
 function Nav() {
+  const { boards, selectedBoardIndex, selectBoard } = useBoard();
+
   return (
     <div className={styles.nav}>
-      <NavButton>1</NavButton>
-      <NavButton>2</NavButton>
-      <NavButton>3</NavButton>
+      {boards.map((board, index) => (
+        <NavButton
+          onClick={() => selectBoard(index)}
+          active={selectedBoardIndex === index}
+          key={index}
+        >
+          {board.name}
+        </NavButton>
+      ))}
       <FlexExpander />
       <FullscreenButton />
       <NavButton>Settings</NavButton>
