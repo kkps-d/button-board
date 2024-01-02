@@ -7,7 +7,7 @@ const DEAD_ZONE = 10;
 const LONG_PRESS_DURATION_MS = 500;
 const LONG_PRESS_ALLOWED_MOVEMENT_PX = 5;
 
-function Knob({ description, type }) {
+function Knob({ description, type, gridSize }) {
   const widgetRef = useRef(null);
   const knobContainerRef = useRef(null);
   const knobRef = useRef(null);
@@ -178,7 +178,7 @@ function Knob({ description, type }) {
   return (
     <div
       ref={widgetRef}
-      className={`widget ${styles.knob}`}
+      className={`widget ${styles.knob} ${styles[gridSize]}`}
       onPointerMove={isPointerDown ? pointerMove : null}
       onPointerDown={editMode ? null : pointerDown}
       onPointerUp={editMode ? null : pointerUp}

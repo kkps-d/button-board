@@ -8,7 +8,6 @@
   border: 1px solid;
   user-select: none;
 
-  padding: 8%;
   overflow: hidden;
 
   transition-property: border-color, box-shadow, background-color;
@@ -16,6 +15,18 @@
   box-shadow: none;
   background-color: var(--color-widget-background);
   transition-duration: 200ms;
+}
+
+.knob.large {
+  padding: 8%;
+}
+
+.knob.medium {
+  padding: 6%;
+}
+
+.knob.small {
+  padding: 4%;
 }
 
 .knob.pressed {
@@ -37,12 +48,23 @@
 .label {
   flex-shrink: 0;
   text-align: center;
-  font-size: 14px;
   font-weight: bold;
 
   transition-property: color;
   color: var(--color-font);
   transition-duration: 200ms;
+}
+
+.knob.large .label {
+  font-size: 14px;
+}
+
+.knob.medium .label {
+  font-size: 13px;
+}
+
+.knob.small .label {
+  font-size: 12px;
 }
 
 .knob.pressed .label {
