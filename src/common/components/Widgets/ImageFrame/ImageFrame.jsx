@@ -4,7 +4,7 @@ import styles from "./ImageFrame.module.css";
 // Sample every n pixels
 const PIXEL_SKIP_COUNT = 5;
 
-function ImageFrame({ description }) {
+function ImageFrame({ description, gridSize }) {
   const { label, labelPosition, src, imageFit } = description.state;
   const [imageLoaded, setImageLoaded] = useState(false);
   const imgRef = useRef(null);
@@ -67,7 +67,7 @@ function ImageFrame({ description }) {
         console.log("dark image");
       }
     }
-  }, [imageLoaded, imgRef, labelRef, labelPosition]);
+  }, [imageLoaded, imgRef, labelRef, labelPosition, gridSize]);
 
   return (
     <div className={`widget ${styles.imageFrame}`}>
@@ -83,7 +83,7 @@ function ImageFrame({ description }) {
           labelPosition === "top" ? styles.top : styles.bottom
         }`}
       >
-        <div ref={labelRef} className={styles.label}>
+        <div ref={labelRef} className={`${styles.label} ${styles[gridSize]}`}>
           {label}
         </div>
       </div>

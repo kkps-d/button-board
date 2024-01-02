@@ -29,10 +29,23 @@
 
 .label {
   font-weight: bold;
-  font-size: 14px;
   border-radius: 20px;
-  padding: 4px 12px;
   backdrop-filter: blur(10px);
+}
+
+.label.large {
+  font-size: 14px;
+  padding: 4px 12px;
+}
+
+.label.medium {
+  font-size: 13px;
+  padding: 3px 10px;
+}
+
+.label.small {
+  font-size: 12px;
+  padding: 2px 8px;
 }
 
 .label.dark {
