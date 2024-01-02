@@ -2,9 +2,23 @@ import PLACEHOLDER_IMAGE_URL from "../../static/placeholder.png";
 import PLACEHOLDER_IMAGE_WHITE_URL from "../../static/placeholder-white.png";
 import PLACEHOLDER_IMAGE_BLACK_URL from "../../static/placeholder-black.png";
 
-export const initialState = {
+const boardTemplate = {
+  id: 1,
+  name: "Template",
+  nextWidgetId: 0,
+  gridSize: "large",
+  rows: 6,
+  cols: 9,
+  descriptions: {},
+};
+
+const demoBoard = {
+  id: 0,
+  name: "Demo board",
   nextWidgetId: 19,
-  editMode: false,
+  gridSize: "large",
+  rows: 6,
+  cols: 9,
   descriptions: {
     1: {
       type: "button",
@@ -144,4 +158,92 @@ export const initialState = {
       },
     },
   },
+};
+
+const sdvxBoard = {
+  id: 1,
+  name: "SDVX",
+  nextWidgetId: 0,
+  gridSize: "large",
+  rows: 6,
+  cols: 9,
+  descriptions: {
+    0: {
+      type: "free-knob",
+      layout: { x: 0, y: 0, w: 2, h: 2 },
+      state: {
+        label: "Mouse X-axis",
+      },
+    },
+    1: {
+      type: "free-knob",
+      layout: { x: 6, y: 0, w: 2, h: 2 },
+      state: {
+        label: "Mouse Y-axis",
+      },
+    },
+    2: {
+      type: "button",
+      layout: { x: 0, y: 2, w: 2, h: 2 },
+      state: {
+        label: "Q",
+        fontSize: "20px",
+      },
+    },
+    3: {
+      type: "button",
+      layout: { x: 2, y: 2, w: 2, h: 2 },
+      state: {
+        label: "W",
+        fontSize: "20px",
+      },
+    },
+    4: {
+      type: "button",
+      layout: { x: 4, y: 2, w: 2, h: 2 },
+      state: {
+        label: "E",
+        fontSize: "20px",
+      },
+    },
+    5: {
+      type: "button",
+      layout: { x: 6, y: 2, w: 2, h: 2 },
+      state: {
+        label: "R",
+        fontSize: "20px",
+      },
+    },
+    6: {
+      type: "button",
+      layout: { x: 1, y: 5, w: 2, h: 1 },
+      state: {
+        label: "Z",
+        fontSize: "20px",
+      },
+    },
+    7: {
+      type: "button",
+      layout: { x: 5, y: 5, w: 2, h: 1 },
+      state: {
+        label: "X",
+        fontSize: "20px",
+      },
+    },
+    8: {
+      type: "button",
+      layout: { x: 3, y: 0, w: 2, h: 1 },
+      state: {
+        label: "C",
+        fontSize: "20px",
+      },
+    },
+  },
+};
+
+export const initialState = {
+  nextWidgetId: 19,
+  editMode: false,
+  boards: [demoBoard, sdvxBoard],
+  selectedBoardIndex: 0,
 };
