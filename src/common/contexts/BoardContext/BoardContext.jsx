@@ -6,40 +6,43 @@ import { initialState } from "./initialState";
 const BoardContext = createContext();
 
 function reducer(state, action) {
-  let boards, currentBoard, nextWidgetId;
+  // Deep copy all the boards
+  let boards = JSON.parse(JSON.stringify(state.boards));
+  let currentBoard = boards[state.selectedBoardIndex];
+
   switch (action.type) {
     case "selectBoard":
       return { ...state, selectedBoardIndex: action.index };
+
     case "setEditMode":
       return { ...state, editMode: action.bool };
-    case "addWidget":
-      // Deep copy all the boards
-      boards = JSON.parse(JSON.stringify(state.boards));
-      currentBoard = boards[state.selectedBoardIndex];
 
+    case "addWidget":
       currentBoard.descriptions[currentBoard.nextWidgetId] = action.description;
       currentBoard.nextWidgetId++;
 
       return { ...state, boards };
-    case "deleteWidget":
-      // Deep copy all the boards for purity
-      boards = JSON.parse(JSON.stringify(state.boards));
-      currentBoard = boards[state.selectedBoardIndex];
 
+    case "deleteWidget":
       delete currentBoard.descriptions[Number(action.id)];
 
       return { ...state, boards };
 
     case "updateLayout":
-      boards = JSON.parse(JSON.stringify(state.boards));
-      currentBoard = boards[state.selectedBoardIndex];
-
       for (let layout of action.layouts) {
         const { i, ...theRest } = layout;
         currentBoard.descriptions[Number(i)].layout = theRest;
       }
 
       return { ...state, boards };
+
+    case "setDimensions":
+      console.log(action);
+      currentBoard.rows = action.rows;
+      currentBoard.cols = action.cols;
+
+      return { ...state, boards };
+
     default:
       throw new Error("Unknown action for BoardContext dispatcher");
   }

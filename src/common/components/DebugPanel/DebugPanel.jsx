@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useBoard } from "../../contexts/BoardContext/BoardContext";
 import styles from "./DebugPanel.module.css";
 
@@ -9,6 +10,7 @@ function DebugPanel() {
     setEditMode,
     addWidget,
     deleteWidget,
+    setDimensions,
   } = useBoard();
 
   function toggleEditMode() {
@@ -17,6 +19,9 @@ function DebugPanel() {
 
   const { name, descriptions, rows, cols, gridSize } =
     boards[selectedBoardIndex];
+
+  const rowsRef = useRef(null);
+  const colsRef = useRef(null);
 
   const widgetTypes = ["label", "button", "invalid"];
   function onAddWidget(e) {
@@ -64,6 +69,12 @@ function DebugPanel() {
     }
   }
 
+  function onChangeDimensions(e) {
+    const rows = rowsRef.current.value;
+    const cols = colsRef.current.value;
+    setDimensions(rows, cols);
+  }
+
   return (
     <div className={styles.debugPanel}>
       <label>
@@ -101,9 +112,21 @@ function DebugPanel() {
         <option value="large">Large</option>
       </select>
       <label>Rows</label>
-      <input className={styles.numInput} type="number" value={rows} />
+      <input
+        ref={rowsRef}
+        onInput={onChangeDimensions}
+        className={styles.numInput}
+        type="number"
+        value={rows}
+      />
       <label>Cols</label>
-      <input className={styles.numInput} type="number" value={cols} />
+      <input
+        ref={colsRef}
+        onInput={onChangeDimensions}
+        className={styles.numInput}
+        type="number"
+        value={cols}
+      />
     </div>
   );
 }
