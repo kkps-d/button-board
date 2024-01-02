@@ -163,7 +163,7 @@ const demoBoard = {
 const sdvxBoard = {
   id: 1,
   name: "SDVX",
-  nextWidgetId: 0,
+  nextWidgetId: 9,
   gridSize: "large",
   rows: 6,
   cols: 9,
