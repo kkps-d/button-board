@@ -4,20 +4,20 @@ The ultimate macro pad web app
 
 <u>**Note: Look into the compound component pattern in the react course. This may be useful in the future**</u>
 
+## Immediate developer tasks
+
+- [x] Test for all sizes of grid
+- [x] Update components to support moving GRID_SIZE into context
+
 ## In development
 
-- [ ] Move more hard coded Board stuff into BoardContext
 - [ ] Add haptics to component
-- [ ] Add board page switching
-- [ ] Reconfigure Vite to output to multiple files for client web interface and server web interface
-- [ ] Add edit mode
-- [ ] Start prelim work on backend
 - [ ] Create an out-of-box experience
-
-## Developer tasks
-
-- [ ] Test for all sizes of grid
-- [ ] Update components to support moving GRID_SIZE into context
+- [ ] Reconfigure Vite to output to multiple files for client web interface and server web interface
+- [ ] Start prelim work on backend
+- [x] Add board page switching
+- [x] Add edit mode
+- [x] Move more hard coded Board stuff into BoardContext
 
 # Minimum Viable Product
 
