@@ -3,8 +3,6 @@
   flex-direction: column;
   gap: 10px;
 
-  padding: 15px;
-
   border: 1px solid;
   user-select: none;
 
@@ -14,6 +12,18 @@
   background-color: var(--color-widget-background);
   color: var(--color-font);
   transition-duration: 200ms;
+}
+
+.scroll.large {
+  padding: 15px;
+}
+
+.scroll.medium {
+  padding: 12px;
+}
+
+.scroll.small {
+  padding: 9px;
 }
 
 .scroll.pressed {
@@ -48,8 +58,20 @@
 
 .scroll > label {
   font-weight: bold;
-  font-size: 14px;
+
   text-align: center;
+}
+
+.scroll.large > label {
+  font-size: 14px;
+}
+
+.scroll.medium > label {
+  font-size: 13px;
+}
+
+.scroll.small > label {
+  font-size: 12px;
 }
 
 .scroll.pressed > label {

@@ -48,7 +48,7 @@ function keepBetween(num, min, max) {
  * When implementing actual input functionality, invert vertical scroll so that scrolling up increases a value instead of decreasing it
  * Also remember to apply scroll sensitivity
  */
-function Scroll({ description, orientation }) {
+function Scroll({ description, orientation, gridSize }) {
   const [count, setCount] = useState(0); // Arbitary number used to keep track of where to render ridges on canvas
   const [isPointerDown, setPointerDown] = useState(false);
   const { editMode } = useBoard();
@@ -197,7 +197,7 @@ function Scroll({ description, orientation }) {
 
   return (
     <div
-      className={`widget ${styles.scroll}`}
+      className={`widget ${styles.scroll} ${styles[gridSize]}`}
       onPointerMove={isPointerDown ? pointerMove : null}
       onPointerDown={editMode ? null : pointerDown}
       onPointerUp={editMode ? null : pointerUp}
