@@ -48,7 +48,7 @@ function Button({ description, type = "button" }) {
     <div
       onPointerDown={editMode ? null : pointerDown}
       onPointerUp={editMode ? null : pointerUp}
-      onClick={onClick}
+      onClick={editMode ? null : onClick}
       ref={ref}
       className={`widget ${styles.button} ${
         type === "toggle" ? styles.toggle : ""
