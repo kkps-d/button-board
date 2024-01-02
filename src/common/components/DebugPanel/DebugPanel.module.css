@@ -1,4 +1,14 @@
 .debugPanel,
 .debugPanel * {
   color: black;
+  font-size: 12px;
+}
+
+.deleteSelect {
+  width: 180px;
+}
+
+.numInput {
+  width: 40px;
+  font-weight: bold;
 }

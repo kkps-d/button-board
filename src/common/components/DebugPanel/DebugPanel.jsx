@@ -2,12 +2,21 @@ import { useBoard } from "../../contexts/BoardContext/BoardContext";
 import styles from "./DebugPanel.module.css";
 
 function DebugPanel() {
-  const { editMode, descriptions, setEditMode, addWidget, deleteWidget } =
-    useBoard();
+  const {
+    editMode,
+    boards,
+    selectedBoardIndex,
+    setEditMode,
+    addWidget,
+    deleteWidget,
+  } = useBoard();
 
   function toggleEditMode() {
     setEditMode(!editMode);
   }
+
+  const { name, descriptions, rows, cols, gridSize } =
+    boards[selectedBoardIndex];
 
   const widgetTypes = ["label", "button", "invalid"];
   function onAddWidget(e) {
@@ -16,7 +25,7 @@ function DebugPanel() {
         case "label":
           addWidget({
             type: "label",
-            layout: { x: 0, y: 1, w: 2, h: 1 },
+            layout: { x: 7, y: 5, w: 2, h: 1 },
             state: {
               label: "New lable",
               fontSize: "20",
@@ -57,20 +66,23 @@ function DebugPanel() {
 
   return (
     <div className={styles.debugPanel}>
+      <label>
+        Board: <b>{name}</b>
+      </label>
       <button onClick={toggleEditMode}>
-        Edit mode: <b>{`${editMode}`}</b>
+        Edit: <b>{`${editMode}`}</b>
       </button>
       <select onChange={onAddWidget}>
-        <option value={"default"}>Add a widget...</option>
+        <option value={"default"}>Add widget</option>
         {widgetTypes.map((widget) => (
           <option key={widget} value={widget}>
             {widget}
           </option>
         ))}
       </select>
-      <select onChange={onDeleteWidget}>
+      <select className={styles.deleteSelect} onChange={onDeleteWidget}>
         <option value={-1}>
-          Remove from {Object.keys(descriptions).length} widgets...
+          Remove from {Object.keys(descriptions).length} widgets
         </option>
         {Object.entries(descriptions).map((entry) => {
           const [id, desc] = entry;
@@ -82,6 +94,16 @@ function DebugPanel() {
           );
         })}
       </select>
+      <label>Grid size</label>
+      <select value={gridSize}>
+        <option value="small">Small</option>
+        <option value="medium">Medium</option>
+        <option value="large">Large</option>
+      </select>
+      <label>Rows</label>
+      <input className={styles.numInput} type="number" value={rows} />
+      <label>Cols</label>
+      <input className={styles.numInput} type="number" value={cols} />
     </div>
   );
 }
