@@ -1,14 +1,14 @@
 :root {
-  --color-background: #323232;
+  --color-background: black;
 
   --color-border: #999;
 
-  --color-widget-background: #323232;
+  --color-widget-background: black;
   --color-widget-background-pressed: #d9d9d9;
   --color-widget-subbackground-pressed: #999999;
   --color-widget-border: #767676;
   --color-widget-border-pressed: #fff;
-  --color-widget-font-pressed: #323232;
+  --color-widget-font-pressed: black;
 
   --color-font: #999;
 
