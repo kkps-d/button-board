@@ -87,7 +87,7 @@ function Board() {
       >
         {Object.entries(descriptions).map((entry) => {
           const [id, desc] = entry;
-          return createWidget({ ...desc, id });
+          return createWidget({ ...desc, id }, gridSize);
         })}
       </ReactGridLayout>
     </div>

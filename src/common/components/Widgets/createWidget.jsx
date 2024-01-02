@@ -7,54 +7,84 @@ import Slider from "./Slider/Slider";
 import Test from "./Test/Test";
 
 /** Returns the wrapping div required for react-grid-layout and the selected widget component */
-export default function createWidget(description) {
+export default function createWidget(description, gridSize) {
   const { id, type, layout } = description;
 
   let widget;
 
   switch (type) {
     case "button":
-      widget = <Button description={description} />;
+      widget = <Button gridSize={gridSize} description={description} />;
       break;
 
     case "toggle":
-      widget = <Button description={description} type={"toggle"} />;
+      widget = (
+        <Button gridSize={gridSize} description={description} type={"toggle"} />
+      );
       break;
 
     case "label":
-      widget = <Label description={description} />;
+      widget = <Label gridSize={gridSize} description={description} />;
       break;
 
     case "v-scroll":
-      widget = <Scroll description={description} orientation={"vertical"} />;
+      widget = (
+        <Scroll
+          gridSize={gridSize}
+          description={description}
+          orientation={"vertical"}
+        />
+      );
       break;
 
     case "h-scroll":
-      widget = <Scroll description={description} orientation={"horizontal"} />;
+      widget = (
+        <Scroll
+          gridSize={gridSize}
+          description={description}
+          orientation={"horizontal"}
+        />
+      );
       break;
 
     case "free-knob":
-      widget = <Knob description={description} type={"free"} />;
+      widget = (
+        <Knob gridSize={gridSize} description={description} type={"free"} />
+      );
       break;
 
     case "fixed-knob":
-      widget = <Knob description={description} type={"fixed"} />;
+      widget = (
+        <Knob gridSize={gridSize} description={description} type={"fixed"} />
+      );
       break;
 
     case "v-slider":
-      widget = <Slider description={description} orientation={"vertical"} />;
+      widget = (
+        <Slider
+          gridSize={gridSize}
+          description={description}
+          orientation={"vertical"}
+        />
+      );
       break;
 
     case "h-slider":
-      widget = <Slider description={description} orientation={"horizontal"} />;
+      widget = (
+        <Slider
+          gridSize={gridSize}
+          description={description}
+          orientation={"horizontal"}
+        />
+      );
       break;
 
     case "test":
-      widget = <Test description={description} />;
+      widget = <Test gridSize={gridSize} description={description} />;
       break;
 
     case "image-frame":
-      widget = <ImageFrame description={description} />;
+      widget = <ImageFrame gridSize={gridSize} description={description} />;
       break;
 
     default:

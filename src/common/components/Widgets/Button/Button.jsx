@@ -4,7 +4,7 @@ import fitToContainer from "../../../utilities/fitToContainer";
 import styles from "./Button.module.css";
 import { useEffect, useRef, useState } from "react";
 
-function Button({ description, type = "button" }) {
+function Button({ description, type = "button", gridSize }) {
   const ref = useRef(null);
   const labelRef = useRef(null);
   const [toggled, setToggled] = useState(false);
