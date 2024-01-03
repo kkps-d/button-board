@@ -8,6 +8,12 @@ The ultimate macro pad web app
   - [ ] Devices
   - [ ] Boards
   - [ ] Socket.io connections for each device
+  - [ ] Static resources inside storage folder
+- [ ] OOBE Experience for client
+  - [ ] install NextUI
+  - [ ] Create new OOBE folder under web folder
+  - [ ] Implement it
+    - [ ] Tasks here
 - [x] Test for all sizes of grid
 - [x] Update components to support moving GRID_SIZE into context
 
