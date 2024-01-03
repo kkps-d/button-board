@@ -2,10 +2,12 @@
 
 The ultimate macro pad web app
 
-<u>**Note: Look into the compound component pattern in the react course. This may be useful in the future**</u>
-
 ## Immediate developer tasks
 
+- [ ] Develop basic CRUD rest api for
+  - [ ] Devices
+  - [ ] Boards
+  - [ ] Socket.io connections for each device
 - [x] Test for all sizes of grid
 - [x] Update components to support moving GRID_SIZE into context
 
@@ -14,10 +16,15 @@ The ultimate macro pad web app
 - [ ] Add haptics to component
 - [ ] Create an out-of-box experience
 - [ ] Reconfigure Vite to output to multiple files for client web interface and server web interface
-- [ ] Start prelim work on backend
+- [x] Start prelim work on backend
 - [x] Add board page switching
 - [x] Add edit mode
 - [x] Move more hard coded Board stuff into BoardContext
+
+## Dev notes
+
+- Look into the compound component pattern in the react course. This may be useful in the future
+- Should a separate thread be spun up for each socket io connection?
 
 # Minimum Viable Product
 
