@@ -25,7 +25,7 @@
 
 ### `/devices/{id}/boards/{boardId}`
 
-- `get` - Gets a specificboard
+- `!` `get` - Gets a specific board
 - `!` `delete` - Deletes a specific board
 - `!` `patch` - Updates a board
   - `{ "board properties": "..." }`
