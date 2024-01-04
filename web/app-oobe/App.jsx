@@ -6,6 +6,7 @@ import { Card } from "@nextui-org/react";
 import Page2 from "./components/SetupPages/Page2/Page2";
 import Page3 from "./components/SetupPages/Page3/Page3";
 import Page4 from "./components/SetupPages/Page4/Page4";
+import Page5 from "./components/SetupPages/Page5/Page5";
 
 function App() {
   const [page, setPage] = useState(0);
@@ -22,6 +23,12 @@ function App() {
       setPage={setPage}
     />,
     <Page4
+      key={3}
+      deviceInfo={deviceInfo}
+      setDeviceInfo={setDeviceInfo}
+      setPage={setPage}
+    />,
+    <Page5
       key={2}
       deviceInfo={deviceInfo}
       setDeviceInfo={setDeviceInfo}
