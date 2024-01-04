@@ -1,13 +1,10 @@
 import { port } from "./api-config.json";
 
-function getDevices(setDevices) {
+async function getDevices() {
   const { hostname } = location;
-  fetch(`http://${location}:${port}/devices`)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      setDevices(data);
-    });
+  let res = await fetch(`http://${hostname}:${port}/devices`);
+  let data = await res.json();
+  return data;
 }
 
 export default getDevices;
