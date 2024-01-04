@@ -31,7 +31,8 @@ function Page4({ setPage, deviceInfo, setDeviceInfo }) {
     }
   );
   const [isDimensionManual, setIsDimensionManual] = useState(
-    deviceInfo.manualDimensions !== null
+    deviceInfo.manualDimensions !== undefined &&
+      deviceInfo.manualDimensions !== null
   );
   const [resolution, setResolution] = useState({ w: 0, h: 0 });
 
