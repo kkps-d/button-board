@@ -7,18 +7,9 @@ import "/node_modules/react-grid-layout/css/styles.css";
 import "/node_modules/react-resizable/css/styles.css";
 import { useBoard } from "../../contexts/BoardContext/BoardContext";
 
-const GRID_SIZES = {
-  small: 80,
-  medium: 90,
-  large: 100,
-};
-// Don't change this, this will break grid squareness
-const GRID_GUTTER = 10;
-
-function calculateGridCount(totalSize, gridSize, gridItemMargin) {
-  const gridCount = (totalSize - gridItemMargin) / (gridItemMargin + gridSize);
-  return Math.floor(gridCount);
-}
+import { GRID_SIZES, GRID_GUTTER } from "./board-constants";
+import calculateBoardDimensions from "../../utilities/calculateBoardDimensions";
+import calculateGridCount from "../../utilities/calculateGridCount";
 
 function Board() {
   const { boards, selectedBoardIndex, editMode, updateLayout } = useBoard();
@@ -39,29 +30,12 @@ function Board() {
   const bgSize = gridSizePx + GRID_GUTTER;
   const bgPosition = GRID_GUTTER / 2;
 
-  useEffect(() => {
-    /** Calculate the space available for the board */
-    const { width: totalWidth, height: totalHeight } =
-      containerRef.current.getBoundingClientRect();
-    const availWidth = totalWidth - GRID_GUTTER * 2;
-    const availHeight = totalHeight - GRID_GUTTER * 2;
-
-    /** Calculate the rows and columns that will fit in the space */
-    const recommendedRows = calculateGridCount(
-      availHeight,
-      gridSizePx,
-      GRID_GUTTER
-    );
-    const recommendedCols = calculateGridCount(
-      availWidth,
-      gridSizePx,
-      GRID_GUTTER
-    );
-
-    console.log(
-      `Recommended: ${recommendedRows} rows, ${recommendedCols} cols`
-    );
-  }, [gridSizePx, cols, rows]);
+  // Shows the recommended rows and cols for the current available space
+  // useEffect(() => {
+  //   const { width, height } = containerRef.current.getBoundingClientRect();
+  //   let results = calculateBoardDimensions(width, height, gridSize);
+  //   console.log(`Recommended: ${results.rows} rows, ${results.cols} cols`);
+  // }, [gridSizePx, cols, rows, gridSize]);
 
   return (
     <div className={styles.container} ref={containerRef}>
