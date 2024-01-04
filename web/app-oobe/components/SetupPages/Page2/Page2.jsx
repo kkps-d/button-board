@@ -49,8 +49,11 @@ function Page2({ setPage, setDeviceInfo }) {
         (device) => selectedDevice === device.id
       );
       setDeviceInfo(selectedDeviceFullInfo);
-      setPage((page) => page + 1);
+    } else {
+      // Otherwise, make sure its null in case user backs and selects new device
+      setDeviceInfo(null);
     }
+    setPage((page) => page + 1);
   }
 
   return (
@@ -58,9 +61,8 @@ function Page2({ setPage, setDeviceInfo }) {
       <CardHeader className="text-sm uppercase font-bold text-default-400">
         Set up your device
       </CardHeader>
-      <CardBody className="flex flex-col text-left">
+      <CardBody className="flex flex-col text-left gap-2">
         <p className="text-lg">Another device has already been set up.</p>
-        <Spacer />
         <RadioGroup
           value={option}
           onValueChange={onValueChange}
@@ -69,7 +71,6 @@ function Page2({ setPage, setDeviceInfo }) {
           <Radio value="new-device">Register a new device</Radio>
           <Radio value="select-existing">Select an existing device</Radio>
         </RadioGroup>
-        <Spacer />
         {option === "select-existing" && (
           <>
             <Spacer />

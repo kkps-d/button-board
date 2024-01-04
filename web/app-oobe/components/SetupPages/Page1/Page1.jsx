@@ -36,7 +36,7 @@ function Page1({ setPage }) {
       <CardHeader className="text-sm uppercase font-bold text-default-400">
         Welcome
       </CardHeader>
-      <CardBody className="flex flex-col text-center py-10">
+      <CardBody className="flex flex-col gap-2 text-center py-10">
         <p className="text-lg">
           Thanks for using{" "}
           <span className="font-bold">
@@ -45,7 +45,6 @@ function Page1({ setPage }) {
           </span>
           !
         </p>
-        <Spacer />
         <p className="text-default-500">Let&apos;s get your device set up</p>
       </CardBody>
       {isLoading && <Progress className="h-1 -mb-1" isIndeterminate />}
