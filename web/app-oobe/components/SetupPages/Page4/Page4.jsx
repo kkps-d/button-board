@@ -15,9 +15,24 @@ import calculateBoardDimensions from "../../../../common/utilities/calculateBoar
 const SIDEBAR_WIDTH = 90;
 
 function Page4({ setPage, deviceInfo, setDeviceInfo }) {
-  const [gridSize, setGridSize] = useState("large");
-  const [displayMode, setDisplayMode] = useState("fullscreen");
-  const [dimensions, setDimensions] = useState({ rows: 1, cols: 1 });
+  const [gridSize, setGridSize] = useState(
+    deviceInfo.defaultGridSize || "large"
+  );
+  const [displayMode, setDisplayMode] = useState(
+    deviceInfo.defaultDisplayMode || "fullscreen"
+  );
+  const [autoDimensions, setAutoDimensions] = useState(
+    deviceInfo.recommendedDimensions || { rows: 1, cols: 1 }
+  );
+  const [manualDimensions, setManualDimensions] = useState(
+    deviceInfo.manualDimensions || {
+      rows: 1,
+      cols: 1,
+    }
+  );
+  const [isDimensionManual, setIsDimensionManual] = useState(
+    deviceInfo.manualDimensions !== null
+  );
   const [resolution, setResolution] = useState({ w: 0, h: 0 });
 
   useEffect(() => {
@@ -29,14 +44,13 @@ function Page4({ setPage, deviceInfo, setDeviceInfo }) {
       };
 
       setResolution(resolution);
-      setDimensions(
+      setAutoDimensions(
         calculateBoardDimensions(resolution.w, resolution.h, gridSize)
       );
     }
 
     function onResize() {
       setResolutionAndDimensions(window.innerWidth, window.innerHeight);
-      console.log("resize");
     }
 
     if (displayMode === "fullscreen") {
@@ -51,13 +65,31 @@ function Page4({ setPage, deviceInfo, setDeviceInfo }) {
     return () => window.removeEventListener("resize", onResize);
   }, [displayMode, gridSize]);
 
+  function onDimensionInput(e, rowOrColumn) {
+    if (rowOrColumn === "row") {
+      setManualDimensions((dimensions) => ({
+        rows: Number(e.target.value),
+        cols:
+          isDimensionManual === false ? autoDimensions.cols : dimensions.cols,
+      }));
+    } else {
+      setManualDimensions((dimensions) => ({
+        rows:
+          isDimensionManual === false ? autoDimensions.rows : dimensions.rows,
+        cols: Number(e.target.value),
+      }));
+    }
+    setIsDimensionManual(true);
+  }
+
   function onNextPage() {
     setDeviceInfo((info) => ({
       ...info,
       defaultGridSize: gridSize,
       defaultDisplayMode: displayMode,
       resolution,
-      recommendedDimensions: dimensions,
+      manualDimensions: isDimensionManual ? manualDimensions : null,
+      recommendedDimensions: autoDimensions,
     }));
     setPage((page) => page + 1);
   }
@@ -105,27 +137,41 @@ function Page4({ setPage, deviceInfo, setDeviceInfo }) {
         <div className="flex flex-row gap-2">
           <Input
             min={1}
-            value={dimensions.rows}
-            onInput={(value) =>
-              setDimensions((dimensions) => ({ ...dimensions, rows: value }))
+            value={
+              isDimensionManual ? manualDimensions.rows : autoDimensions.rows
             }
+            onInput={(e) => onDimensionInput(e, "row")}
             label="Rows"
             type="number"
+            color={isDimensionManual ? "warning" : ""}
           />
           <Input
             min={1}
-            value={dimensions.cols}
-            onInput={(value) =>
-              setDimensions((dimensions) => ({ ...dimensions, cols: value }))
+            value={
+              isDimensionManual ? manualDimensions.cols : autoDimensions.cols
             }
+            onInput={(e) => onDimensionInput(e, "col")}
             label="Cols"
             type="number"
+            color={isDimensionManual ? "warning" : ""}
           />
         </div>
-        <p className="text-default-500 text-sm">
-          Your display size is being measured and the recommended dimensions are
-          being calculated
-        </p>
+        {isDimensionManual ? (
+          <>
+            <Button color="warning" onClick={() => setIsDimensionManual(false)}>
+              Reset
+            </Button>
+            <p className="text-warning text-sm">
+              Choosing board dimensions manually may not provide the most
+              optimal experience.
+            </p>
+          </>
+        ) : (
+          <p className="text-default-500 text-sm">
+            Your display size is being measured and the recommended dimensions
+            are being calculated
+          </p>
+        )}
       </CardBody>
       <CardFooter>
         <Button onClick={() => setPage((page) => page - 1)} variant="light">
