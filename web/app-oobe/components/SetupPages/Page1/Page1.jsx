@@ -45,7 +45,9 @@ function Page1({ setPage }) {
           </span>
           !
         </p>
-        <p className="text-default-500">Let&apos;s get your device set up</p>
+        <p className="text-default-500 text-sm">
+          Let&apos;s get your device set up
+        </p>
       </CardBody>
       {isLoading && <Progress className="h-1 -mb-1" isIndeterminate />}
       {error && (

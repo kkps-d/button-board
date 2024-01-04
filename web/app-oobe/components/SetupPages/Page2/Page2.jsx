@@ -66,6 +66,7 @@ function Page2({ setPage, setDeviceInfo }) {
         <RadioGroup
           value={option}
           onValueChange={onValueChange}
+          className="text-sm"
           label="Would you like to select an existing device, or register a new one?"
         >
           <Radio value="new-device">Register a new device</Radio>
