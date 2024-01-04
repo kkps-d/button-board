@@ -17,6 +17,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         app: resolve(__dirname, "app", "index.html"),
+        "app-oobe": resolve(__dirname, "app-oobe", "index.html"),
         configure: resolve(__dirname, "configure", "index.html"),
       },
     },
