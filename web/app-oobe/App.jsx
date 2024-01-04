@@ -4,15 +4,22 @@ import Body from "./components/Body/Body";
 import Page1 from "./components/SetupPages/Page1/Page1";
 import { Card } from "@nextui-org/react";
 import Page2 from "./components/SetupPages/Page2/Page2";
+import Page3 from "./components/SetupPages/Page3/Page3";
 
 function App() {
   const [page, setPage] = useState(0);
-  const [deviceInfo, setDeviceInfo] = useState({});
+  const [deviceInfo, setDeviceInfo] = useState(null);
   const [darkMode, setDarkMode] = useState(true);
 
   const pages = [
-    <Page1 key={0} setDeviceInfo={setDeviceInfo} setPage={setPage} />,
+    <Page1 key={0} setPage={setPage} />,
     <Page2 key={1} setDeviceInfo={setDeviceInfo} setPage={setPage} />,
+    <Page3
+      key={2}
+      deviceInfo={deviceInfo}
+      setDeviceInfo={setDeviceInfo}
+      setPage={setPage}
+    />,
   ];
 
   return (
