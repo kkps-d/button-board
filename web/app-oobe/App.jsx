@@ -7,12 +7,12 @@ import Page2 from "./components/SetupPages/Page2/Page2";
 
 function App() {
   const [page, setPage] = useState(0);
-  const [requestBody, setRequestBody] = useState({});
+  const [deviceInfo, setDeviceInfo] = useState({});
   const [darkMode, setDarkMode] = useState(true);
 
   const pages = [
-    <Page1 key={0} setRequestBody={setRequestBody} setPage={setPage} />,
-    <Page2 key={0} setRequestBody={setRequestBody} setPage={setPage} />,
+    <Page1 key={0} setDeviceInfo={setDeviceInfo} setPage={setPage} />,
+    <Page2 key={1} setDeviceInfo={setDeviceInfo} setPage={setPage} />,
   ];
 
   return (
