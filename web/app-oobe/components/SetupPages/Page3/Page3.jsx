@@ -20,12 +20,6 @@ function Page3({ setPage, deviceInfo, setDeviceInfo }) {
     setPage((page) => page + 1);
   }
 
-  function onInput(e) {
-    const value = e.target.value;
-    if (value.length > CHARACTER_LIMIT) return;
-    setDeviceName(e.target.value);
-  }
-
   return (
     <>
       <CardHeader className="text-sm uppercase font-bold text-default-400">
@@ -35,8 +29,9 @@ function Page3({ setPage, deviceInfo, setDeviceInfo }) {
         <p className="text-lg">Name your device</p>
         <Input
           onClear={() => setDeviceName("")}
-          onInput={onInput}
+          onInput={(e) => setDeviceName(e.target.value)}
           placeholder="Device name"
+          maxLength={CHARACTER_LIMIT}
           endContent={
             <div className="text-sm">{CHARACTER_LIMIT - deviceName.length}</div>
           }

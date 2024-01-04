@@ -5,6 +5,7 @@ import Page1 from "./components/SetupPages/Page1/Page1";
 import { Card } from "@nextui-org/react";
 import Page2 from "./components/SetupPages/Page2/Page2";
 import Page3 from "./components/SetupPages/Page3/Page3";
+import Page4 from "./components/SetupPages/Page4/Page4";
 
 function App() {
   const [page, setPage] = useState(0);
@@ -20,11 +21,17 @@ function App() {
       setDeviceInfo={setDeviceInfo}
       setPage={setPage}
     />,
+    <Page4
+      key={2}
+      deviceInfo={deviceInfo}
+      setDeviceInfo={setDeviceInfo}
+      setPage={setPage}
+    />,
   ];
 
   return (
     <div
-      className={`h-svh flex flex-col relative bg-background text-foreground ${
+      className={`h-svh flex flex-col relative overflow-y-scroll bg-background text-foreground ${
         darkMode ? "dark" : "light"
       }`}
     >
