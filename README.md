@@ -5,15 +5,26 @@ The ultimate macro pad web app
 ## Immediate developer tasks
 
 - [ ] Develop basic CRUD rest api for
-  - [ ] Devices
+  - [x] Devices
   - [ ] Boards
   - [ ] Socket.io connections for each device
   - [ ] Static resources inside storage folder
 - [ ] OOBE Experience for client
-  - [ ] install NextUI
-  - [ ] Create new OOBE folder under web folder
+
+  - [x] install NextUI
+  - [x] Create new OOBE folder under web folder
   - [ ] Implement it
-    - [ ] Tasks here
+    - [x] Implement most of the experience
+    - [ ] When visiting any path, check the following on client side
+      - [ ] Check if hostname is `localhost`
+        - [ ] If yes, redirect to `/configure`
+        - [ ] If not, go to below check
+      - [ ] Check if `device` exists in localstorage
+        - [ ] If yes, make a request to server to see if device exists/valid
+          - [ ] If yes, redirect to `/app`
+          - [ ] If no, clear `device` and redirect to `/get-started`
+        - [ ] If no, redirect to `/get-started`
+
 - [x] Test for all sizes of grid
 - [x] Update components to support moving GRID_SIZE into context
 
