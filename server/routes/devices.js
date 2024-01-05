@@ -18,17 +18,39 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  const { name } = req.body;
+  const keysToCheckFor = [
+    "name",
+    "defaultGridSize",
+    "defaultDisplayMode",
+    "resolution",
+    "manualDimensions",
+    "recommendedDimensions",
+  ];
+  const keysNotIncluded = [];
+
   console.log(req.body);
-  if (!name) {
-    res.status(400).json({ error: apiErrors.DEVICE_NAME_NOT_PROVIDED });
+
+  // Check for the required keys in the request
+  keysToCheckFor.forEach((key) => {
+    if (!(key in req.body)) {
+      keysNotIncluded.push(key);
+    }
+  });
+
+  if (keysNotIncluded.length > 0) {
+    res.status(400).json({
+      error: apiErrors.INCOMPLETE_OR_NO_DATA,
+      missing_keys: keysNotIncluded,
+    });
     return;
   }
+
   const newDevice = {
+    ...req.body,
     id: uuid(),
-    name,
     boards: [],
   };
+
   db.update(({ devices }) => devices.push(newDevice));
   res.status(201).json(newDevice);
 });
