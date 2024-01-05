@@ -3,11 +3,17 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
+  Progress,
   Spacer,
 } from "@nextui-org/react";
+import postDevice from "../../../api/postDevice";
+import { useState } from "react";
+import useLocalObjectStorage from "../../../../common/hooks/useLocalObjectStorage";
 
-function Page5({ setPage, deviceInfo, setDeviceInfo }) {
-  function onNextPage() {}
+function Page5({ setPage, deviceInfo }) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [device, saveDevice] = useLocalObjectStorage("device", {});
 
   const {
     name,
@@ -17,6 +23,33 @@ function Page5({ setPage, deviceInfo, setDeviceInfo }) {
     recommendedDimensions,
     manualDimensions,
   } = deviceInfo;
+
+  function onError(err) {
+    setError(`${err.message}. Please try again.`);
+    setIsLoading(false);
+  }
+
+  function onRegister() {
+    setError(null);
+    setIsLoading(true);
+
+    const data = {
+      name,
+      defaultGridSize,
+      defaultDisplayMode,
+      resolution,
+      recommendedDimensions,
+      manualDimensions,
+    };
+
+    postDevice(data)
+      .then((result) => {
+        setIsLoading(false);
+        saveDevice(result);
+        setPage((page) => page + 1);
+      })
+      .catch(onError);
+  }
 
   return (
     <>
@@ -68,12 +101,27 @@ function Page5({ setPage, deviceInfo, setDeviceInfo }) {
           Click the <b>Back</b> button to make any changes
         </p>
       </CardBody>
+      {isLoading && <Progress className="h-1 -mb-1" isIndeterminate />}
+      {error && (
+        <div className="py-2 text-center text-danger-500 text-sm bg-danger-50">
+          {error}
+        </div>
+      )}
       <CardFooter>
-        <Button onClick={() => setPage((page) => page - 1)} variant="light">
+        <Button
+          onClick={() => setPage((page) => page - 1)}
+          variant="light"
+          isDisabled={isLoading}
+        >
           Back
         </Button>
         <div className="flex-grow"></div>
-        <Button variant="shadow" onClick={onNextPage} color="primary">
+        <Button
+          variant="shadow"
+          onClick={onRegister}
+          color="primary"
+          isDisabled={isLoading}
+        >
           Register Device
         </Button>
       </CardFooter>
