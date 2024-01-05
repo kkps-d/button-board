@@ -10,7 +10,7 @@ import Page5 from "./components/SetupPages/Page5/Page5";
 import Page6 from "./components/SetupPages/Page6/Page6";
 
 function App() {
-  const [page, setPage] = useState(5);
+  const [page, setPage] = useState(0);
   const [deviceInfo, setDeviceInfo] = useState(null);
   const [darkMode, setDarkMode] = useState(true);
 
