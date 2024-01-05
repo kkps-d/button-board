@@ -3,9 +3,10 @@ import { JSONFilePreset } from "lowdb/node";
 import apiErrors from "../enums/api-errors.js";
 
 import { v4 as uuid } from "uuid";
+import { DB_DEFAULT, DB_PATH } from "../db-config.js";
 
 const router = express.Router();
-const db = await JSONFilePreset("storage/db.json", {});
+const db = await JSONFilePreset(DB_PATH, DB_DEFAULT);
 
 router.get("/", (req, res) => {
   const { devices } = db.data;
