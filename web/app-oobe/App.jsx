@@ -7,9 +7,10 @@ import Page2 from "./components/SetupPages/Page2/Page2";
 import Page3 from "./components/SetupPages/Page3/Page3";
 import Page4 from "./components/SetupPages/Page4/Page4";
 import Page5 from "./components/SetupPages/Page5/Page5";
+import Page6 from "./components/SetupPages/Page6/Page6";
 
 function App() {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(5);
   const [deviceInfo, setDeviceInfo] = useState(null);
   const [darkMode, setDarkMode] = useState(true);
 
@@ -29,7 +30,13 @@ function App() {
       setPage={setPage}
     />,
     <Page5
-      key={2}
+      key={4}
+      deviceInfo={deviceInfo}
+      setDeviceInfo={setDeviceInfo}
+      setPage={setPage}
+    />,
+    <Page6
+      key={5}
       deviceInfo={deviceInfo}
       setDeviceInfo={setDeviceInfo}
       setPage={setPage}
