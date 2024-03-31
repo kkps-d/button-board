@@ -12,10 +12,10 @@ const SOCKET_IO_PORT = 3001;
 
 const app = express();
 
-console.log(`[index] '${process.env.NODE_ENV}' mode`);
+console.log(`[index] '${process.env.NODE_ENV || "dev"}' mode`);
 
 // Middleware
-if (process.env.NODE_ENV === "dev") {
+if ((process.env.NODE_ENV || "dev") === "dev") {
   console.log(`[index] Enabling CORS middleware for dev mode`);
   app.use(cors());
 }
