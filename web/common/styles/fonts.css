@@ -1,4 +1,5 @@
 * {
   font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
   color: var(--color-font);
 }
