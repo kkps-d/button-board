@@ -5,7 +5,8 @@
   "type": "module",
   "exports": "./index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "SET NODE_ENV=prod&&node index.js",
+    "dev": "SET NODE_ENV=dev&&nodemon index.js"
   },
   "author": "",
   "license": "ISC",
