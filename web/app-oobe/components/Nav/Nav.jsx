@@ -8,8 +8,9 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from "@nextui-org/react";
-import Logo from "../Logo/Logo";
+
 import { useState } from "react";
+import Logo from "../../../common/components/Logo/Logo";
 
 function Nav() {
   const menuItems = [
