@@ -1,19 +1,5 @@
 import { useState } from "react";
-import {
-  Button,
-  ButtonGroup,
-  Card,
-  Divider,
-  Image,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  Tab,
-  Tabs,
-  useDisclosure,
-} from "@nextui-org/react";
+import { useDisclosure } from "@nextui-org/react";
 import Nav from "./components/Nav/Nav";
 import Footer from "./components/Footer/Footer";
 import Body from "./components/Body/Body";
