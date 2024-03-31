@@ -1,37 +1,48 @@
 import {
   Button,
-  Link,
   Navbar,
-  NavbarBrand,
   NavbarContent,
   NavbarItem,
-  NavbarMenu,
-  NavbarMenuItem,
-  NavbarMenuToggle,
   Tab,
   Tabs,
 } from "@nextui-org/react";
 
 import {
+  ArrowsPointingInIcon,
   ArrowsPointingOutIcon,
   Cog6ToothIcon,
   MoonIcon,
   SunIcon,
 } from "@heroicons/react/24/solid";
-
-import { useState } from "react";
-import Logo from "../../../common/components/Logo/Logo";
-import LogoCompact from "../../../common/components/LogoCompact/LogoCompact";
+import { useEffect, useState } from "react";
 
 function Nav({ darkMode, setDarkMode, onNavOpen }) {
+  const [isFullscreen, setFullscreen] = useState(
+    document.fullscreenElement != null
+  );
+
+  function onSetFullscreen() {
+    if (isFullscreen) {
+      document.exitFullscreen();
+    } else {
+      document.documentElement.requestFullscreen();
+    }
+  }
+
+  useEffect(() => {
+    function handleFullScreenChange() {
+      console.log("Fullscreen");
+      setFullscreen((prevState) => !prevState);
+    }
+
+    document.addEventListener("fullscreenchange", handleFullScreenChange);
+
+    return () =>
+      document.removeEventListener("fullscreenchange", handleFullScreenChange);
+  }, []);
+
   return (
     <Navbar>
-      {/* <NavbarContent className="hidden sm:flex">
-        <NavbarBrand>
-          <Logo />
-        </NavbarBrand>
-      </NavbarContent> */}
-
       <NavbarContent>
         <Tabs>
           <Tab title="Demo board"></Tab>
@@ -55,8 +66,12 @@ function Nav({ darkMode, setDarkMode, onNavOpen }) {
           <Button variant="light" isIconOnly={true} onClick={onNavOpen}>
             <Cog6ToothIcon className="h-6 w-6" />
           </Button>
-          <Button variant="light" isIconOnly={true}>
-            <ArrowsPointingOutIcon className="h-6 w-6" />
+          <Button variant="light" isIconOnly={true} onClick={onSetFullscreen}>
+            {isFullscreen ? (
+              <ArrowsPointingInIcon className="h-6 w-6" />
+            ) : (
+              <ArrowsPointingOutIcon className="h-6 w-6" />
+            )}
           </Button>
         </NavbarItem>
       </NavbarContent>
