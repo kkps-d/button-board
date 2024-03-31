@@ -56,6 +56,34 @@ router.post("/", (req, res) => {
   res.status(201).json(newDevice);
 });
 
+router.patch("/", (req, res) => {
+  if (!req.body.id) {
+    res.status(400).json({
+      error: apiErrors.INCOMPLETE_OR_NO_DATA,
+      missing_keys: ["id"],
+    });
+    return;
+  }
+
+  // Find the device with the id in the db
+  const { devices } = db.data;
+  let device = devices.find((d) => d.id === req.body.id);
+  if (!device) {
+    res.status(404).json({ error: apiErrors.DEVICE_NOT_FOUND });
+    return;
+  }
+
+  // Update properties of device
+  db.update(({ devices }) => {
+    const i = devices.findIndex((d) => d.id === req.body.id);
+    devices[i] = { ...devices[i], ...req.body };
+    device = devices[i];
+    return devices;
+  });
+
+  res.status(200).json(device);
+});
+
 router.get("/:id", (req, res) => {
   const { devices } = db.data;
   const id = req.params.id;
