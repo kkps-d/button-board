@@ -10,7 +10,6 @@ The ultimate macro pad web app
   - [ ] Socket.io connections for each device
   - [ ] Static resources inside storage folder
 - [ ] OOBE Experience for client
-
   - [x] install NextUI
   - [x] Create new OOBE folder under web folder
   - [ ] Implement it
@@ -24,7 +23,9 @@ The ultimate macro pad web app
           - [ ] If yes, redirect to `/app`
           - [ ] If no, clear `device` and redirect to `/get-started`
         - [ ] If no, redirect to `/get-started`
-
+- [ ] Get main app to load data from the APIs
+- [ ] Update the existing app to use the NextUI components
+- [ ] Try to get dist build to be served by server
 - [x] Test for all sizes of grid
 - [x] Update components to support moving GRID_SIZE into context
 
