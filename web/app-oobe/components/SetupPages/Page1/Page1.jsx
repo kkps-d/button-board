@@ -8,7 +8,7 @@ import {
 } from "@nextui-org/react";
 import Logo from "../../Logo/Logo";
 import { useEffect, useState } from "react";
-import getDevices from "../../../api/getDevices";
+import getDevices from "../../../../common/api/getDevices";
 
 function Page1({ setPage }) {
   const [isLoading, setIsLoading] = useState(false);

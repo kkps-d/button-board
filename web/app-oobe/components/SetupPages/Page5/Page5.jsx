@@ -6,11 +6,12 @@ import {
   Progress,
   Spacer,
 } from "@nextui-org/react";
-import postDevice from "../../../api/postDevice";
+import postDevice from "../../../../common/api/postDevice";
 import { useState } from "react";
 import useLocalObjectStorage from "../../../../common/hooks/useLocalObjectStorage";
+import patchDevice from "../../../../common/api/patchDevice";
 
-function Page5({ setPage, deviceInfo }) {
+function Page5({ setPage, deviceInfo, setupMode }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [device, saveDevice] = useLocalObjectStorage("device", {});
@@ -33,22 +34,24 @@ function Page5({ setPage, deviceInfo }) {
     setError(null);
     setIsLoading(true);
 
-    const data = {
-      name,
-      defaultGridSize,
-      defaultDisplayMode,
-      resolution,
-      recommendedDimensions,
-      manualDimensions,
-    };
-
-    postDevice(data)
-      .then((result) => {
-        setIsLoading(false);
-        saveDevice(result);
-        setPage((page) => page + 1);
-      })
-      .catch(onError);
+    if (setupMode === "existing-device") {
+      patchDevice(deviceInfo)
+        .then((result) => {
+          setIsLoading(false);
+          saveDevice(result);
+          setPage((page) => page + 1);
+        })
+        .catch(onError);
+      setIsLoading(false);
+    } else {
+      postDevice(deviceInfo)
+        .then((result) => {
+          setIsLoading(false);
+          saveDevice(result);
+          setPage((page) => page + 1);
+        })
+        .catch(onError);
+    }
   }
 
   return (
@@ -122,7 +125,9 @@ function Page5({ setPage, deviceInfo }) {
           color="primary"
           isDisabled={isLoading}
         >
-          Register Device
+          {setupMode === "existing-device"
+            ? "Select Device"
+            : "Register Device"}
         </Button>
       </CardFooter>
     </>

@@ -11,9 +11,9 @@ import {
   Spacer,
 } from "@nextui-org/react";
 import { useState } from "react";
-import getDevices from "../../../api/getDevices";
+import getDevices from "../../../../common/api/getDevices";
 
-function Page2({ setPage, setDeviceInfo }) {
+function Page2({ setPage, setDeviceInfo, setSetupMode }) {
   const [option, setOption] = useState("new-device");
   const [devices, setDevices] = useState([]);
   const [selectedDevice, setSelectedDevice] = useState(null);
@@ -49,9 +49,11 @@ function Page2({ setPage, setDeviceInfo }) {
         (device) => selectedDevice === device.id
       );
       setDeviceInfo(selectedDeviceFullInfo);
+      setSetupMode("existing-device");
     } else {
       // Otherwise, make sure its null in case user backs and selects new device
       setDeviceInfo(null);
+      setSetupMode("new-device");
     }
     setPage((page) => page + 1);
   }

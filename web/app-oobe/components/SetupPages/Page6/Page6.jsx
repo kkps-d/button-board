@@ -1,7 +1,7 @@
 import { Button, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
 import useLocalObjectStorage from "../../../../common/hooks/useLocalObjectStorage";
 
-function Page6({ setPage, deviceInfo, setDeviceInfo }) {
+function Page6({ setPage, deviceInfo, setDeviceInfo, setupMode }) {
   const [device, saveDevice] = useLocalObjectStorage("device", {});
 
   function onFinish() {
@@ -15,7 +15,9 @@ function Page6({ setPage, deviceInfo, setDeviceInfo }) {
       </CardHeader>
       <CardBody className="flex flex-col text-left gap-2">
         <p className="text-lg">
-          Your new device has been registered successfully!
+          {setupMode === "existing-device"
+            ? "Your device has been configured to use an existing configuration successfully!"
+            : "Your new device has been registered successfully!"}
         </p>
         <p className="text-default-500 text-sm">
           Press <b>Finish</b> to start using the app!

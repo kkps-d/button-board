@@ -10,7 +10,7 @@ import { useState } from "react";
 
 const CHARACTER_LIMIT = 30;
 
-function Page3({ setPage, deviceInfo, setDeviceInfo }) {
+function Page3({ setPage, deviceInfo, setDeviceInfo, setupMode }) {
   const [deviceName, setDeviceName] = useState(
     deviceInfo ? deviceInfo.name : ""
   );
@@ -26,7 +26,9 @@ function Page3({ setPage, deviceInfo, setDeviceInfo }) {
         Set up your device
       </CardHeader>
       <CardBody className="flex flex-col text-left gap-2">
-        <p className="text-lg">Name your device</p>
+        <p className="text-lg">
+          {setupMode === "existing-device" ? "Rename" : "Name"} your device
+        </p>
         <Input
           onClear={() => setDeviceName("")}
           onInput={(e) => setDeviceName(e.target.value)}

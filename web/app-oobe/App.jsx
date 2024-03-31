@@ -12,16 +12,23 @@ import Page6 from "./components/SetupPages/Page6/Page6";
 function App() {
   const [page, setPage] = useState(0);
   const [deviceInfo, setDeviceInfo] = useState(null);
+  const [setupMode, setSetupMode] = useState("new-device"); // new-device or existing-device
   const [darkMode, setDarkMode] = useState(true);
 
   const pages = [
     <Page1 key={0} setPage={setPage} />,
-    <Page2 key={1} setDeviceInfo={setDeviceInfo} setPage={setPage} />,
+    <Page2
+      key={1}
+      setDeviceInfo={setDeviceInfo}
+      setPage={setPage}
+      setSetupMode={setSetupMode}
+    />,
     <Page3
       key={2}
       deviceInfo={deviceInfo}
       setDeviceInfo={setDeviceInfo}
       setPage={setPage}
+      setupMode={setupMode}
     />,
     <Page4
       key={3}
@@ -34,12 +41,14 @@ function App() {
       deviceInfo={deviceInfo}
       setDeviceInfo={setDeviceInfo}
       setPage={setPage}
+      setupMode={setupMode}
     />,
     <Page6
       key={5}
       deviceInfo={deviceInfo}
       setDeviceInfo={setDeviceInfo}
       setPage={setPage}
+      setupMode={setupMode}
     />,
   ];
 
