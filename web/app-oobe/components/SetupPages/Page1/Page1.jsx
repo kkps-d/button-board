@@ -53,7 +53,7 @@ function Page1({ setPage }) {
           </p>
           <p className="text-default-500 text-sm">
             Press <b>Go to app</b> to go to the app, <br />
-            or <b>Next</b> to go through the setup process again. <br />
+            or <b>Continue setup</b> to go run the setup process again. <br />
             This will clear the configuration on this device.
           </p>
         </CardBody>
@@ -82,7 +82,7 @@ function Page1({ setPage }) {
         {deviceExists ? (
           <>
             <Button onClick={onNextPage} variant="light">
-              Next
+              Continue setup
             </Button>
             <div className="flex-grow"></div>
             <Button isDisabled={isLoading} onClick={onGoToApp} color="primary">
