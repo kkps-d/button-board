@@ -95,15 +95,4 @@ router.get("/:id", (req, res) => {
   res.send(device);
 });
 
-router.get("/:id/boards", (req, res) => {
-  const { devices } = db.data;
-  const id = req.params.id;
-  const device = devices.find((device) => device.id === id);
-  if (!device) {
-    res.status(404).json({ error: apiErrors.DEVICE_NOT_FOUND });
-    return;
-  }
-  res.send(device.boards);
-});
-
 export default router;

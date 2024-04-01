@@ -5,6 +5,7 @@ import path from "node:path";
 // Routes
 import hello from "./routes/hello.js";
 import devices from "./routes/devices.js";
+import boards from "./routes/boards.js";
 import bodyParser from "body-parser";
 
 const HTTP_PORT = 3000;
@@ -37,6 +38,7 @@ app.use("/get-started", (req, res) => {
 
 // REST API Routes
 app.use("/devices", devices);
+app.use("/devices/:id/boards", boards);
 
 app.listen(HTTP_PORT, () => {
   console.log(`[index] HTTP server listening on port ${HTTP_PORT}`);
